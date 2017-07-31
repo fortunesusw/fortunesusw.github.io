@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on 示水的程序客栈</title>
-    <link>https://sufuq.com/page/</link>
+    <link>https://fortunesusw.github.io/page/</link>
     <description>Recent content in Pages on 示水的程序客栈</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
     
-	<atom:link href="https://sufuq.com/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fortunesusw.github.io/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About me</title>
-      <link>https://sufuq.com/page/about/</link>
+      <link>https://fortunesusw.github.io/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
-      <guid>https://sufuq.com/page/about/</guid>
+      <guid>https://fortunesusw.github.io/page/about/</guid>
       <description> 一只浓眉猿，游走在代码的海洋，喜欢GEEK，正在努力滚爬成长中。
 喜欢下雨天， 更喜欢下雨天安静地看看书，码代码。
 个人技能:  前后端都有涉及一些， 开发过网站， 写过爬虫， 玩过SEO， 做过存储服务（混合云）， 也搞过图片与视频处理等
