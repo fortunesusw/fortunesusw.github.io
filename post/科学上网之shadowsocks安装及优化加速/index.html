@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>科学上网之Shadowsocks安装及优化加速</title>
+  <meta property="og:title" content="科学上网之Shadowsocks安装及优化加速" />
+  <meta name="twitter:title" content="科学上网之Shadowsocks安装及优化加速" />
+  <meta name="description" content="">
+  <meta property="og:description" content="">
+  <meta name="twitter:description" content="">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E4%B9%8Bshadowsocks%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8A%A0%E9%80%9F/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.25.1" />
+  <link rel="canonical" href="http://sufuq.com/post/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E4%B9%8Bshadowsocks%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8A%A0%E9%80%9F/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>科学上网之Shadowsocks安装及优化加速</h1>
+                
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p></p>
+
+<p>[TOC]</p>
+
+<h2 id="一-服务端安装">一、 服务端安装</h2>
+
+<p>官方推荐 Ubuntu 14.04 LTS 作为服务器以便使用 TCP Fast Open。服务器端的安装非常简单。</p>
+
+<p>Debian / Ubuntu:</p>
+
+<pre><code class="language-bash">apt-get install python-pip
+</code></pre>
+
+<p>CentOS:</p>
+
+<pre><code class="language-bash">yum install python-setuptools &amp;&amp; easy_install pip
+</code></pre>
+
+<p>然后直接在后台运行：</p>
+
+<pre><code class="language-bash">ssserver -p 8000 -k password -m rc4-md5 -d start
+</code></pre>
+
+<p>当然也可以使用配置文件进行配置，方法创建 <code>/etc/shadowsocks.json</code> 文件，填入如下内容：</p>
+
+<pre><code class="language-json">{
+    &quot;server&quot;:&quot;ip&quot;,
+    &quot;server_port&quot;:8388,
+    &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+    &quot;local_port&quot;:1080,
+    &quot;password&quot;:&quot;xxxxx&quot;,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;,
+    &quot;fast_open&quot;: true
+}
+</code></pre>
+
+<p>然后使用配置文件在后台运行：</p>
+
+<pre><code class="language-bash">ssserver -c /etc/shadowsocks.json -d start
+</code></pre>
+
+<p>如果要停止运行，将命令中的 <code>start</code> 改成 <code>stop</code> 。</p>
+
+<p><strong>TIPS:</strong> 加密方式推荐使用 <code>rc4-md5</code> ，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看 <a href="https://github.com/clowwindy/shadowsocks/issues/178">issue</a> 。</p>
+
+<h2 id="二-客户端安装">二、 客户端安装</h2>
+
+<p><a href="https://github.com/shadowsocks/shadowsocks/wiki/Ports-and-Clients">Ports and Clients · shadowsocks/shadowsocks Wiki · GitHub</a></p>
+
+<h2 id="三-加速优化">三、 加速优化</h2>
+
+<p>下面介绍几种简单的优化方法，也是比较推荐的几种，能够得到立竿见影的效果。当然还有一些黑科技我没提到，如有大神路过，也可留言指出。</p>
+
+<h3 id="3-1-内核参数优化">3.1 内核参数优化</h3>
+
+<p>首先，将 Linux 内核升级到 3.5 或以上。</p>
+
+<h4 id="第一步-增加系统文件描述符的最大限数">第一步，增加系统文件描述符的最大限数</h4>
+
+<p>编辑文件 <code>limits.conf</code></p>
+
+<pre><code class="language-bash">vim /etc/security/limits.conf
+</code></pre>
+
+<p>增加以下两行</p>
+
+<pre><code class="language-bash">* soft nofile 51200
+* hard nofile 51200
+</code></pre>
+
+<p>启动shadowsocks服务器之前，设置以下参数</p>
+
+<pre><code class="language-bash">ulimit -n 51200
+</code></pre>
+
+<h4 id="第二步-调整内核参数">第二步，调整内核参数</h4>
+
+<p>修改配置文件 <code>/etc/sysctl.conf</code></p>
+
+<pre><code class="language-bash">fs.file-max = 51200
+net.core.rmem_max = 67108864
+net.core.wmem_max = 67108864
+net.core.netdev_max_backlog = 250000
+net.core.somaxconn = 4096
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_fin_timeout = 30
+net.ipv4.tcp_keepalive_time = 1200
+net.ipv4.ip_local_port_range = 10000 65000
+net.ipv4.tcp_max_syn_backlog = 8192
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_rmem = 4096 87380 67108864
+net.ipv4.tcp_wmem = 4096 65536 67108864
+net.ipv4.tcp_mtu_probing = 1
+net.ipv4.tcp_congestion_control = hybla
+</code></pre>
+
+<p>修改后执行 <code>sysctl -p</code> 使配置生效</p>
+
+<h3 id="3-2-锐速">3.2 锐速</h3>
+
+<p>锐速是一款非常不错的TCP底层加速软件，可以非常方便快速地完成服务器网络的优化，配合 ShadowSocks 效果奇佳。目前锐速官方也出了永久免费版本，适用带宽20M、3000加速连接，个人使用是足够了。如果需要，先要在锐速官网注册个账户。</p>
+
+<p>然后确定自己的内核是否在锐速的支持列表里，如果不在，请先更换内核，如果不确定，请使用 <a href="http://my.serverspeeder.com/w.do?m=lslm">手动安装</a> 。</p>
+
+<p>确定自己的内核版本在支持列表里，就可以使用以下命令快速安装了。</p>
+
+<pre><code class="language-bash">wget http://my.serverspeeder.com/d/ls/serverSpeederInstaller.tar.gz
+tar xzvf serverSpeederInstaller.tar.gzbash serverSpeederInstaller.sh
+</code></pre>
+
+<p>输入在官网注册的账号密码进行安装，参数设置直接回车默认即可，
+最后两项输入 y 开机自动启动锐速，y 立刻启动锐速。之后可以通过 <code>lsmod</code> 查看是否有appex模块在运行。</p>
+
+<p>到这里还没结束，我们还要修改锐速的3个参数， <code>vim /serverspeeder/etc/config</code></p>
+
+<pre><code class="language-bash">rsc=&quot;1&quot; #RSC网卡驱动模式  
+advinacc=&quot;1&quot; #流量方向加速  
+maxmode=&quot;1&quot; #最大传输模式
+
+</code></pre>
+
+<p>digitalocean vps的网卡支持rsc和gso高级算法，所以可以开启 <code>rsc=&quot;1&quot;</code> ， <code>gso=&quot;1&quot;</code> 。</p>
+
+<p>重新启动锐速</p>
+
+<pre><code class="language-bash">service serverSpeeder restart
+</code></pre>
+
+<h2 id="四-防火墙设置">四、 防火墙设置</h2>
+
+<pre><code class="language-bash">iptables -F
+iptables -A INPUT -p tcp -m tcp --dport 8388 -j ACCEPT
+</code></pre>
+
+<h2 id="五-参照">五、 参照</h2>
+
+<p><a href="http://wuchong.me/blog/2015/02/02/shadowsocks-install-and-optimize/">科学上网之 Shadowsocks 安装及优化加速</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8Evps%E5%8C%BA%E5%88%AB/" data-toggle="tooltip" data-placement="top" title="虚拟主机、云主机与VPS区别">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.25.1</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

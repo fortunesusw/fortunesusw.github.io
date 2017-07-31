@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>虚拟主机、云主机与VPS区别</title>
+  <meta property="og:title" content="虚拟主机、云主机与VPS区别" />
+  <meta name="twitter:title" content="虚拟主机、云主机与VPS区别" />
+  <meta name="description" content="
+云主机和VPS主机的区别不是太大。简单说,云主机就类似于更高级的VPS主机产品，因为云主机是基于服务器集群架设的，云主机能支持在线升级，而且理论上来说,只要资源池充足，可以无限扩展云主机自身的性能。  肯定是云主机比VPS好的多，这点是毫无疑问的！
+
+
+">
+  <meta property="og:description" content="
+云主机和VPS主机的区别不是太大。简单说,云主机就类似于更高级的VPS主机产品，因为云主机是基于服务器集群架设的，云主机能支持在线升级，而且理论上来说,只要资源池充足，可以无限扩展云主机自身的性能。  肯定是云主机比VPS好的多，这点是毫无疑问的！
+
+
+">
+  <meta name="twitter:description" content="
+云主机和VPS主机的区别不是太大。简单说,云主机就类似于更高级的VPS主机产品，因为云主机是基于服务器集群架设的，云主机能支持在线升级，而且理论上来说,只要资源池充足，可以无限扩展云主机自身的性能。  肯定是云主机比VPS好的多，这点是毫无疑问的！
+
+
+">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8Evps%E5%8C%BA%E5%88%AB/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.25.1" />
+  <link rel="canonical" href="http://sufuq.com/post/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8Evps%E5%8C%BA%E5%88%AB/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>虚拟主机、云主机与VPS区别</h1>
+                
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>云主机和VPS主机的区别不是太大。简单说,云主机就类似于更高级的VPS主机产品，因为云主机是基于服务器集群架设的，云主机能支持在线升级，而且理论上来说,只要资源池充足，可以无限扩展云主机自身的性能。  肯定是云主机比VPS好的多，这点是毫无疑问的！</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="虚拟主机">虚拟主机</h2>
+
+<p>共享主机也称虚拟主机，从互联网诞生至今，大部分站长都是从『共享主机』(shared hosting)开始学习建站的。所谓『共享主机』，就是一台服务器上有许多网站，大家共享这台服务器的硬件和带宽。如果它发生故障，那么上面的所有网站都无法访问。</p>
+
+<h2 id="vps">VPS</h2>
+
+<p>VPS主机(Virtual Private Server 虚拟专用服务器)，将一部服务器分割成多个虚拟专享服务器的优质服务。每个VPS都可分配独立公网IP地址、独立操作系统、独立超大空间、独立内存、独立CPU资源、独立执行程序和独立系统配置等。用户除了可以分配多个虚拟主机及无限企业邮箱外，更具有独立服务器功能，可自行安装程序，单独重启服务器。</p>
+
+<h2 id="云主机-cvm-cloud-virtual-machine">云主机（CVM cloud virtual machine）</h2>
+
+<p>『云主机』(Cloud hosting)可以看成是新一代的共享主机。</p>
+
+<p>首先，主机公司将它的硬件和网络线路，做成一朵”云”，然后提供一些通向这朵”云”的网络接口API，供客户使用。这时，每个客户共享的不再是某一台特定的服务器，而是云里的所有服务器。</p>
+
+<p>比如，假设你要把本机的文件备份到网上，你可以使用共享主机，把文件传到某一台服务器上；也可以使用云主机，通过某种形式的接口，把它们传到云里。也就是说，共享主机用户直接面对特定的服务器，而云主机用户直接面对网络接口，看不到服务器内部。</p>
+
+<p>一个通俗的比喻是，你可以向银行租一个编号为”8888″的保险箱(共享主机)，也可以把贵重物品直接交给保管公司，听任他们保管。</p>
+
+<p>诸如Gmail、FaceBook、Twitter、Flickr这样的产品，都可以看作是基于”云主机”的服务。</p>
+
+<p>云主机能真正获得root权限，用户可以重装和升级操作系统，而VPS主机用户没有root权限，无法重装和升级操作系统。</p>
+
+<h2 id="参照">参照</h2>
+
+<p><a href="http://www.jianshu.com/p/bafbf40c7c38">虚拟主机、云主机和VPS的区别 - 简书</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/" data-toggle="tooltip" data-placement="top" title="自动化部署WordPress">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E4%B9%8Bshadowsocks%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8A%A0%E9%80%9F/" data-toggle="tooltip" data-placement="top" title="科学上网之Shadowsocks安装及优化加速">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.25.1</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+
