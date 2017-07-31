@@ -5,20 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>示水的程序客栈</title>
-  <meta property="og:title" content="示水的程序客栈" />
-  <meta name="twitter:title" content="示水的程序客栈" />
+  <title>git备忘</title>
+  <meta property="og:title" content="git备忘" />
+  <meta name="twitter:title" content="git备忘" />
+  <meta name="description" content="
+git 常用命令
+
+
+">
+  <meta property="og:description" content="
+git 常用命令
+
+
+">
+  <meta name="twitter:description" content="
+git 常用命令
+
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.png" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/" />
+  <meta property="og:url" content="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/" />
+  <link rel="canonical" href="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,14 +172,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>示水的程序客栈</h1>
+            <div class="post-heading">
+              <h1>git备忘</h1>
                 
-                  
-                    <hr class="small">
-                    <span class="page-subheading">点滴积累，点滴成长</span>
-                  
                 
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -175,114 +192,70 @@
 
 
     
-  <div role="main" class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-
-        <div class="posts-list">
-          
-          
-            <article class="post-preview">
-              <a href="http://sufuq.com/post/python%E8%AF%86%E5%88%AB%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/">
-                <h2 class="post-title">Python识别网站技术</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  发表于 2017-07-31
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>探测网站使用什么语言开发，服务框架等</p>
-
-<p></p>
-                  <a href="http://sufuq.com/post/python%E8%AF%86%E5%88%AB%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/python">python</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/">
-                <h2 class="post-title">git备忘</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  发表于 2017-07-31
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <blockquote>
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
 <p>git 常用命令</p>
 </blockquote>
 
 <p></p>
-                  <a href="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
 
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/git">git</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/">
-                <h2 class="post-title">python yield关键字</h2>
-                
-              </a>
+<h2 id="查询远程分支">查询远程分支</h2>
 
-              <span class="post-meta">
-  发表于 2017-07-31
-  
-</span>
+<pre><code class="language-git">git ls-remote --heads origin
+</code></pre>
 
+<h2 id="删除远程分支">删除远程分支</h2>
 
-              <div class="post-entry">
-                
-                  <blockquote>
-<p>python yield关键字总结</p>
-</blockquote>
+<pre><code class="language-git">git push origin --delete &lt;branch&gt;
+</code></pre>
 
-<p></p>
-                  <a href="http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
+<h2 id="创建远程分支">创建远程分支</h2>
 
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/python">python</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-        </div>
+<pre><code class="language-git">git checkout -b &lt;branch&gt;
+git push -u origin &lt;branch&gt;
+</code></pre>
 
+<h2 id="放弃本地修改">放弃本地修改</h2>
+
+<pre><code class="language-git">git reset HEAD~1
+git reset --soft HEAD^
+</code></pre>
+
+<h2 id="本地项目推送到github">本地项目推送到github</h2>
+
+<pre><code>1. github上先创建一个项目
+2. 本地git init
+3. git add .
+4. git commit -m &quot;init project&quot; .
+5. git git remote add origin git@github.com:$username/$project.git
+6. git remote -v  #看状态
+7. git push -u origin master
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
         
-      </div>
+          <li class="previous">
+            <a href="http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/" data-toggle="tooltip" data-placement="top" title="python yield关键字">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/python%E8%AF%86%E5%88%AB%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/" data-toggle="tooltip" data-placement="top" title="Python识别网站技术">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
