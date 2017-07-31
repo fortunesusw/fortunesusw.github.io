@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ffmpeg on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/ffmpeg/</link>
+    <description>Recent content in Ffmpeg on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Mon, 31 Jul 2017 20:52:45 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>视频处理  基础使用篇</title>
+      <link>http://sufuq.com/post/%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86--%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E7%AF%87/</link>
+      <pubDate>Mon, 31 Jul 2017 20:52:45 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86--%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E7%AF%87/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;整理些常用的图片处理命令， 一方面是工作有用到， 另一方面做备忘&lt;/p&gt;
+
+&lt;p&gt;主要使用ffmpeg&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

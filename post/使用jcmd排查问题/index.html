@@ -5,20 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>使用JCMD排查问题</title>
+  <meta property="og:title" content="使用JCMD排查问题" />
+  <meta name="twitter:title" content="使用JCMD排查问题" />
+  <meta name="description" content="
+jcmd 是向JVM发送诊断命令请求
+
+官方推荐可以替代jmap、 jstack等
+
+
+">
+  <meta property="og:description" content="
+jcmd 是向JVM发送诊断命令请求
+
+官方推荐可以替代jmap、 jstack等
+
+
+">
+  <meta name="twitter:description" content="
+jcmd 是向JVM发送诊断命令请求
+
+官方推荐可以替代jmap、 jstack等
+
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/%E4%BD%BF%E7%94%A8jcmd%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/%E4%BD%BF%E7%94%A8jcmd%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,9 +178,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Tags</h1>
+            <div class="post-heading">
+              <h1>使用JCMD排查问题</h1>
                 
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -170,50 +198,166 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>jcmd 是向JVM发送诊断命令请求</p>
+
+<p>官方推荐可以替代jmap、 jstack等</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="一-基本用法">一、 基本用法</h2>
+
+<pre><code>jcmd [-l|-h|-help]
+
+jcmd pid|main-class PerfCounter.print
+
+jcmd pid|main-class -f filename
+
+jcmd pid|main-class command[ arguments]
+</code></pre>
+
+<h2 id="二-实用命令">二、 实用命令</h2>
+
+<h3 id="2-1-查看进程">2.1 查看进程</h3>
+
+<pre><code>两个命令都可以看到，注意权限
+jps
+jcmd 
+</code></pre>
+
+<h3 id="2-2-查看帮助">2.2 查看帮助</h3>
+
+<pre><code>#查看所有命令
+jcmd pid help
+
+#查看指定命令的帮助
+#可以看到对应命令对服务的影响程度及使用参数
+jcmd pid help [command]
+</code></pre>
+
+<h3 id="2-3-程序启动时间">2.3 程序启动时间</h3>
+
+<pre><code>#以s为单位
+jcmd pid VM.uptime
+</code></pre>
+
+<h3 id="2-4-打印hotspot的信息和jdk版本">2.4 打印HotSpot的信息和JDK版本</h3>
+
+<pre><code>jcmd pid VM.version
+</code></pre>
+
+<h3 id="2-5-打印jvm所以系统环境变量">2.5 打印JVM所以系统环境变量</h3>
+
+<pre><code>jcmd pid VM.system_properties
+</code></pre>
+
+<h3 id="2-6-打印所有用于jvm的标志-如gc配置等">2.6 打印所有用于JVM的标志（如GC配置等）</h3>
+
+<pre><code>jcmd pid VM.flags
+</code></pre>
+
+<h3 id="2-7-打印类的柱状统计图-histogram">2.7 打印类的柱状统计图（histogram）</h3>
+
+<blockquote>
+<p>官方推荐替代<code>jmap -histo &lt;pid&gt;</code></p>
+</blockquote>
+
+<pre><code>jcmd pid GC.class_histogram
+</code></pre>
+
+<h3 id="2-8-创建堆栈信息-head-dump-hprof-dump">2.8 创建堆栈信息(head dump\hprof dump)</h3>
+
+<blockquote>
+<p>官方推荐替代<code>jmap -dump:file=&lt;file&gt;</code></p>
+</blockquote>
+
+<pre><code>jcmd pid GC.heap_dump &lt;filename&gt;
+</code></pre>
+
+<h3 id="2-9-打印所有线程信息">2.9 打印所有线程信息</h3>
+
+<blockquote>
+<p>可以部分替代jstack</p>
+</blockquote>
+
+<pre><code>jcmd pid Thread.print
+</code></pre>
+
+<h3 id="2-10-打印进程启动参数">2.10 打印进程启动参数</h3>
+
+<pre><code>jcmd pid VM.command_line
+</code></pre>
+
+<h2 id="三-使用jcmd排查故障">三、 使用JCMD排查故障</h2>
+
+<h3 id="3-1-jfr-java-flight-recorder-的使用">3.1 JFR(Java Flight Recorder)的使用</h3>
+
+<blockquote>
+<p>记录程序完整运行信息</p>
+
+<p>在JDK 8u40版本之前， 需要加<code>-XX:+UnlockCommercialFeatures -XX:FlightRecorder</code></p>
+
+<p>统计信息有内存、cpu、系统、io、代码、线程、GC等，很丰富</p>
+
+<p>jcmd pid help JFR.start 查看详细说明</p>
+</blockquote>
+
+<h4 id="3-1-1-开启记录">3.1.1 开启记录</h4>
+
+<pre><code># 延迟20s开始记录， 记录2分钟，名称为MyRecording， 并且数据保存在当前目录为xxx.jfr
+jcmd pid JFR.start name=MyRecording settings=profile delay=20s duration=2m filename=xxx.jfr
+</code></pre>
+
+<h4 id="3-1-2-检查记录">3.1.2 检查记录</h4>
+
+<blockquote>
+<p>可以检查该pid所有的jfr记录，包括已经停止的和正在运行的</p>
+</blockquote>
+
+<pre><code>jcmd pid JFR.check
+</code></pre>
+
+<h4 id="3-1-3-停止jfr的记录">3.1.3 停止jfr的记录</h4>
+
+<pre><code>#可以指定name、recording等。 jcmd pid help JFR.stop 查看详情
+jcmd pid JFR.stop [option]
+</code></pre>
+
+<h4 id="3-1-4-导出记录">3.1.4 导出记录</h4>
+
+<blockquote>
+<p>如果正在运行还没结束，可以强制结束，并写入指定的文件</p>
+</blockquote>
+
+<pre><code>jcmd pid JFR.dump name=MyRecording filename=xxx.jfr
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86--%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E7%AF%87/" data-toggle="tooltip" data-placement="top" title="视频处理  基础使用篇">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/jdk-inetaddress%E7%9A%84%E4%B8%80%E4%BA%9B%E7%82%B9/" data-toggle="tooltip" data-placement="top" title="JDK InetAddress的一些点">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">4</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

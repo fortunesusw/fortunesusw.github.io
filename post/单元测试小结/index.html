@@ -5,20 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>单元测试小结</title>
+  <meta property="og:title" content="单元测试小结" />
+  <meta name="twitter:title" content="单元测试小结" />
+  <meta name="description" content="
+主要使用Junit、 Mockito、 PowerMockito
+
+记录常用的场景， 做个代码片段备忘
+
+
+">
+  <meta property="og:description" content="
+主要使用Junit、 Mockito、 PowerMockito
+
+记录常用的场景， 做个代码片段备忘
+
+
+">
+  <meta name="twitter:description" content="
+主要使用Junit、 Mockito、 PowerMockito
+
+记录常用的场景， 做个代码片段备忘
+
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,9 +178,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Tags</h1>
+            <div class="post-heading">
+              <h1>单元测试小结</h1>
                 
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -170,50 +198,88 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>主要使用Junit、 Mockito、 PowerMockito</p>
+
+<p>记录常用的场景， 做个代码片段备忘</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="普通mock接口及实现">普通Mock接口及实现</h2>
+
+<pre><code class="language-java">import static org.mockito.Mockito.*;
+
+@Mock
+private HttpRequestContext httpRequestContext;
+
+doNothing().when(httpRequestContext).getPath();
+doThrow(new NullPointerException()).when(httpRequestContext).getPath();
+doReturn(new InBoundHeaders()).when(httpRequestContext).getRequestHeaders();
+doAnswer(i -&gt; {
+    String key = (String) i.getArguments()[0];
+    //do something like: assert
+    return key;
+}).when(httpRequestContext).getRequestHeader(anyString());
+doReturn(&quot;HEAD&quot;).when(httpRequestContext).getMethod();
+verify(httpRequestContext, times(1)).getPath();
+</code></pre>
+
+<h2 id="mock私有方法">mock私有方法</h2>
+
+<blockquote>
+<p>这个需要mock一个实现类， 使用PowerMockito， 不能使用Mockito</p>
+</blockquote>
+
+<pre><code class="language-java">public class Policy {
+    private List&lt;String&gt; args;
+    public Policy(List&lt;String&gt; args) {
+        this.args = args;
+    }
+    public boolean exists(HttpRequestContext httpRequestContext, String type) {
+        //do something
+        return true;
+    }
+}
+
+private Policy policy = new Policy(Stream.of(&quot;a&quot;, &quot;b&quot;).collect(Collectors.toList()));
+
+Policy spyPolicy = PowerMockito.spy(policy);
+
+//调用单次或者多次的exists都返回true， PowerMockito不支持调用多次返回不同的值
+PowerMockito.doReturn(true).when(spyPolicy, &quot;exists&quot;, any(HttpRequestContext.class), anyString());
+
+//当想模拟返回不同的值，只能把exists改为public， 同时使用Mockito
+//第一次调用exists返回false, 第二次返回false, 第三次返回true
+Mockito.doReturn(false).doReturn(false).doReturn(true).when(spyPolicy).exists(any(HttpRequestContext.class), anyString());
+//可以作用doAnswer来做更多验证
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/shell%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-toggle="tooltip" data-placement="top" title="Shell简单模拟多线程">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/" data-toggle="tooltip" data-placement="top" title="脚本工具集">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">4</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

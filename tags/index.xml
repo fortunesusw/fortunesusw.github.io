@@ -22,11 +22,47 @@
     </item>
     
     <item>
+      <title>Ffmpeg</title>
+      <link>http://sufuq.com/tags/ffmpeg/</link>
+      <pubDate>Mon, 31 Jul 2017 20:52:45 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/ffmpeg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>http://sufuq.com/tags/git/</link>
       <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Imagemagick</title>
+      <link>http://sufuq.com/tags/imagemagick/</link>
+      <pubDate>Mon, 31 Jul 2017 20:49:36 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/imagemagick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://sufuq.com/tags/java/</link>
+      <pubDate>Mon, 31 Jul 2017 21:04:19 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://sufuq.com/tags/linux/</link>
+      <pubDate>Mon, 31 Jul 2017 20:39:01 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -63,6 +99,24 @@
       <pubDate>Mon, 31 Jul 2017 20:25:33 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/tags/shadowsocks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>http://sufuq.com/tags/shell/</link>
+      <pubDate>Mon, 31 Jul 2017 20:44:38 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unittest</title>
+      <link>http://sufuq.com/tags/unittest/</link>
+      <pubDate>Mon, 31 Jul 2017 20:42:26 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/unittest/</guid>
       <description></description>
     </item>
     

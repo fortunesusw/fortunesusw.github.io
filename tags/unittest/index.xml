@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unittest on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/unittest/</link>
+    <description>Recent content in Unittest on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Mon, 31 Jul 2017 20:42:26 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/unittest/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>单元测试小结</title>
+      <link>http://sufuq.com/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/</link>
+      <pubDate>Mon, 31 Jul 2017 20:42:26 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;主要使用Junit、 Mockito、 PowerMockito&lt;/p&gt;
+
+&lt;p&gt;记录常用的场景， 做个代码片段备忘&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

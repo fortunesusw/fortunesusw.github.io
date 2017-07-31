@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/shell/</link>
+    <description>Recent content in Shell on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Mon, 31 Jul 2017 20:44:38 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>脚本工具集</title>
+      <link>http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/</link>
+      <pubDate>Mon, 31 Jul 2017 20:44:38 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;整理日常比较常用的脚本，提高效率&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell简单模拟多线程</title>
+      <link>http://sufuq.com/post/shell%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 31 Jul 2017 20:39:01 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/shell%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;使用场景，跑一批数据，对这批数据做检查等，如对一批视频url做下载请求等等&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

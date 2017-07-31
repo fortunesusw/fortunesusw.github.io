@@ -5,20 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>脚本工具集</title>
+  <meta property="og:title" content="脚本工具集" />
+  <meta name="twitter:title" content="脚本工具集" />
+  <meta name="description" content="
+整理日常比较常用的脚本，提高效率
+
+
+">
+  <meta property="og:description" content="
+整理日常比较常用的脚本，提高效率
+
+
+">
+  <meta name="twitter:description" content="
+整理日常比较常用的脚本，提高效率
+
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,9 +172,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Tags</h1>
+            <div class="post-heading">
+              <h1>脚本工具集</h1>
                 
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -170,50 +192,91 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>整理日常比较常用的脚本，提高效率</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="生成uuid">生成uuid</h2>
+
+<pre><code class="language-bash">#!/bin/bash
+cd `dirname $0`
+test $# -lt 2 &amp;&amp; echo &quot;error arguments | sh gen_uuid.sh yyyy-MM-dd HH:mm:ss&quot; &amp;&amp; exit 1
+
+Ymd=$1
+HMS=$2
+
+millisecones_time=`date -d &quot;$1 $2&quot; +&quot;%s&quot;`
+idc=1
+bid=1
+
+echo $[($millisecones_time*1000&lt;&lt;22) + ($idc&lt;&lt;16) +($bid&lt;&lt;10)]
+</code></pre>
+
+<h2 id="解析uuid">解析uuid</h2>
+
+<pre><code class="language-bash">#!/bin/bash
+test $# -lt 1 &amp;&amp; echo &quot;arguments error&quot; &amp;&amp; exit 1
+uuid=$1
+uuidmilliseconds=$[$uuid&gt;&gt;22]
+echo `date -d @$(  echo &quot;($uuidmilliseconds + 500) / 1000&quot; | bc) +&quot;%F %T&quot;`
+</code></pre>
+
+<h2 id="ip转整形">ip转整形</h2>
+
+<pre><code class="language-bash">echo $(($(($(($((${1}/256))/256))/256))%256)).$(($(($((${1}/256))/256))%256)).$(($((${1}/256))%256)).$((${1}%256))
+</code></pre>
+
+<h2 id="整形或长整形转ip">整形或长整形转ip</h2>
+
+<pre><code class="language-bash">#!/bin/bash
+IP=$1; IPNUM=0
+for (( i=0 ; i&lt;4 ; ++i )); do
+    ((IPNUM+=${IP%%.*}*$((256**$((3-${i}))))))
+    IP=${IP#*.}
+done
+echo $IPNUM
+</code></pre>
+
+<h2 id="ssh-无密钥登陆">SSH 无密钥登陆</h2>
+
+<pre><code class="language-bash">#生成公私锊
+ssh-keygen -t rsa
+ssh-keygen -b 4096 -t rsa
+
+#scp到服务器
+scp  ~/.ssh/id_rsa.pub root@ip:
+
+#存入到.ssh/authorized_keys
+cat id_rsa.pub &gt;&gt; .ssh/authorized_keys
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/" data-toggle="tooltip" data-placement="top" title="单元测试小结">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86--%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E7%AF%87/" data-toggle="tooltip" data-placement="top" title="图片处理  基础使用篇">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">4</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
