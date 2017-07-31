@@ -7,10 +7,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Mon, 31 Jul 2017 19:35:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Jul 2017 19:47:48 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>自动化部署WordPress</title>
+      <link>http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/</link>
+      <pubDate>Mon, 31 Jul 2017 19:47:48 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;用脚本实现自动部署&lt;code&gt;Mysql&lt;/code&gt;, &lt;code&gt;Apache&lt;/code&gt;, &lt;code&gt;PHP&lt;/code&gt;, &lt;code&gt;WordPress&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python命令参数解析</title>
+      <link>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Mon, 31 Jul 2017 19:44:07 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;python中 getopt 模块，该模块是专门用来处理命令行参数的
+函数&lt;code&gt;getopt(args, shortopts, longopts = [])&lt;/code&gt;
+参数args一般是&lt;code&gt;sys.argv[1:]&lt;/code&gt;，shortopts 短格式 (-)， longopts 长格式(&amp;ndash;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Xpath基本用法</title>

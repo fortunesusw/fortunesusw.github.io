@@ -5,20 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>自动化部署WordPress</title>
+  <meta property="og:title" content="自动化部署WordPress" />
+  <meta name="twitter:title" content="自动化部署WordPress" />
+  <meta name="description" content="
+用脚本实现自动部署Mysql, Apache, PHP, WordPress
+
+
+">
+  <meta property="og:description" content="
+用脚本实现自动部署Mysql, Apache, PHP, WordPress
+
+
+">
+  <meta name="twitter:description" content="
+用脚本实现自动部署Mysql, Apache, PHP, WordPress
+
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,9 +172,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>Tags</h1>
+            <div class="post-heading">
+              <h1>自动化部署WordPress</h1>
                 
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -170,26 +192,142 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>用脚本实现自动部署<code>Mysql</code>, <code>Apache</code>, <code>PHP</code>, <code>WordPress</code></p>
+</blockquote>
+
+<p></p>
+
+<pre><code class="language-bash">#/bin/sh
+install_dir=&quot;/var/www/html&quot;
+#Creating Random WP Database Credenitals
+db_name=&quot;wp`date +%s`&quot;
+db_user=$db_name
+db_password=`date |md5sum |cut -c '1-12'`
+sleep 1
+mysqlrootpass=`date |md5sum |cut -c '1-12'`
+sleep 1
+ftp_password=`date |md5sum |cut -c '1-12'`
+
+#### Install Packages for https and mysql
+yum -y install httpd httpd-devel
+yum -y install mysql mysql-server mysql-devel
+yum -y install lynx vsftpd
+##### Open firewall for http and SSL
+iptables -F
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+/etc/init.d/iptables save
+/etc/init.d/iptables restart
+#### Start http
+/etc/init.d/httpd start
+chkconfig httpd on
+
+#### Start mysql and set root password
+/etc/init.d/mysqld start
+chkconfig mysqld on
+
+/usr/bin/mysql -e &quot;USE mysql;&quot;
+/usr/bin/mysql -e &quot;UPDATE user SET Password=PASSWORD($mysqlrootpass) WHERE user='root';&quot;
+/usr/bin/mysql -e &quot;FLUSH PRIVILEGES;&quot;
+touch /root/.my.cnf
+chmod 640 /root/.my.cnf
+echo &quot;[client]&quot;&gt;/root/.my.cnf
+echo &quot;user=root&quot;&gt;/root/.my.cnf
+echo &quot;password=&quot;$mysqlrootpass&gt;/root/.my.cnf
+####Install PHP
+yum -y install php php-common php-mysql php-gd php-mbstring php-mcrypt php-xml php-devel
+
+sed -i '0,/AllowOverride\ None/! {0,/AllowOverride\ None/ s/AllowOverride\ None/AllowOverride\ All/}' /etc/httpd/conf/httpd.conf #Allow htaccess usage
+
+/etc/init.d/httpd restart
+
+####Download and extract latest Wordpress Package
+if test -f /tmp/latest.tar.gz
+then
+echo &quot;WP is already downloaded.&quot;
+else
+echo &quot;Downloading Wordpress&quot;
+cd /tmp/ &amp;&amp; wget &quot;http://wordpress.org/latest.tar.gz&quot;;
+fi
+
+/bin/tar -C $install_dir -zxf /tmp/latest.tar.gz --strip-components=1
+chown apache: $install_dir -R
+#### Set FTP Credentials
+echo $ftp_password | passwd apache --stdin
+/etc/init.d/vsftpd start
+chkconfig vsftpd on
+
+#### Create WP-config and set DB credentials
+/bin/mv $install_dir/wp-config-sample.php $install_dir/wp-config.php
+
+/bin/sed -i &quot;s/database_name_here/$db_name/g&quot; $install_dir/wp-config.php
+/bin/sed -i &quot;s/username_here/$db_user/g&quot; $install_dir/wp-config.php
+/bin/sed -i &quot;s/password_here/$db_password/g&quot; $install_dir/wp-config.php
+
+cat &lt;&lt; EOF &gt;&gt; $install_dir/wp-config.php
+define('FS_METHOD', 'ftpext');
+define('FTP_BASE', '$install_dir');
+define('FTP_USER', 'apache');
+define('FTP_PASS', '$ftp_password');
+define('FTP_HOST', '127.0.0.1');
+define('FTP_SSL', false);
+EOF
+
+cat &lt;&lt; EOF &gt;&gt; $install_dir/.htaccess
+# BEGIN WordPress
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond % !-f
+RewriteCond % !-d
+RewriteRule . /index.php [L]
+&lt;/IfModule&gt;
+# END WordPress
+EOF
+
+chown apache: $install_dir -R
+
+##### Set WP Salts
+grep -A50 'table_prefix' $install_dir/wp-config.php &gt; /tmp/wp-tmp-config
+/bin/sed -i '/**#@/,/$p/d' $install_dir/wp-config.php
+/usr/bin/lynx --dump -width 200 https://api.wordpress.org/secret-key/1.1/salt/ &gt;&gt; $install_dir/wp-config.php
+/bin/cat /tmp/wp-tmp-config &gt;&gt; $install_dir/wp-config.php &amp;&amp; rm /tmp/wp-tmp-config -f
+/usr/bin/mysql -u root -e &quot;CREATE DATABASE $db_name&quot;
+/usr/bin/mysql -u root -e &quot;GRANT ALL PRIVILEGES ON $db_name.* to '&quot;$db_user&quot;'@'localhost' IDENTIFIED BY '&quot;$db_password&quot;';&quot;
+
+######Display generated passwords to log file.
+echo &quot;Database Name: &quot; $db_name
+echo &quot;Database User: &quot; $db_user
+echo &quot;Database Password: &quot; $db_password
+echo &quot;Mysql root password: &quot; $mysqlrootpass
+echo &quot;FTP Password: &quot; $ftp_password
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="Python命令参数解析">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">4</span></a>
+        
       
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

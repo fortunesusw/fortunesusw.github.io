@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Xpath基本用法</title>
+  <meta property="og:title" content="Xpath基本用法" />
+  <meta name="twitter:title" content="Xpath基本用法" />
+  <meta name="description" content="xpath在解析html, xml很方便， 例如用爬虫去爬网页， 解析的节点提取数据
+ &lt;!-more&ndash;&gt;
+节点（node） 在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。
+以下面这xml文档为例：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; &lt;class&gt; &lt;student&gt; &lt;name gender=&quot;boy&quot;&gt;Harry Potter&lt;/name&gt; &lt;ID&gt;24&lt;/ID&gt; &lt;/student&gt; &lt;student&gt; &lt;name gender=&quot;girl&quot;&gt;Li Rose&lt;font color=red&gt;（monitor）&lt;/font&gt;&lt;/name&gt; &lt;ID&gt;1&lt;/ID&gt; &lt;/student&gt; &lt;/class&gt;  上面例子的节点为：
+&lt;classs&gt; （文档节点/根节点） &lt;ID&gt;24&lt;/ID&gt; （元素节点） gender=&quot;boy&quot; （属性节点）  节点关系
+父：每个元素以及属性都有一个父。例子中的父是; 子：元素节点可有零个、一个或多个子。例子中的子是; 兄弟：拥有相同的父的节点。例子中和是兄弟; 祖先：某节点的父、父的父，等等。 后代：某节点的子、子的子，等等。
+基本值（或称原子值，Atomic value） 基本值是无父或无子的节点。 上面例子的基本值为：
+Harry Potter &quot;boy&quot;  项目（Item） 项目是基本值或者节点。
+注意，以下表达式当然可以混合使用
+1 nodename 选取此节点的所有子节点。
+from scrapy import Selector def parse(self, response): selector=Selector(response) content=selector.xpath(class)# 选取 class 元素的所有子节点。  2 / 从根节点选取。">
+  <meta property="og:description" content="xpath在解析html, xml很方便， 例如用爬虫去爬网页， 解析的节点提取数据
+ &lt;!-more&ndash;&gt;
+节点（node） 在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。
+以下面这xml文档为例：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; &lt;class&gt; &lt;student&gt; &lt;name gender=&quot;boy&quot;&gt;Harry Potter&lt;/name&gt; &lt;ID&gt;24&lt;/ID&gt; &lt;/student&gt; &lt;student&gt; &lt;name gender=&quot;girl&quot;&gt;Li Rose&lt;font color=red&gt;（monitor）&lt;/font&gt;&lt;/name&gt; &lt;ID&gt;1&lt;/ID&gt; &lt;/student&gt; &lt;/class&gt;  上面例子的节点为：
+&lt;classs&gt; （文档节点/根节点） &lt;ID&gt;24&lt;/ID&gt; （元素节点） gender=&quot;boy&quot; （属性节点）  节点关系
+父：每个元素以及属性都有一个父。例子中的父是; 子：元素节点可有零个、一个或多个子。例子中的子是; 兄弟：拥有相同的父的节点。例子中和是兄弟; 祖先：某节点的父、父的父，等等。 后代：某节点的子、子的子，等等。
+基本值（或称原子值，Atomic value） 基本值是无父或无子的节点。 上面例子的基本值为：
+Harry Potter &quot;boy&quot;  项目（Item） 项目是基本值或者节点。
+注意，以下表达式当然可以混合使用
+1 nodename 选取此节点的所有子节点。
+from scrapy import Selector def parse(self, response): selector=Selector(response) content=selector.xpath(class)# 选取 class 元素的所有子节点。  2 / 从根节点选取。">
+  <meta name="twitter:description" content="xpath在解析html, xml很方便， 例如用爬虫去爬网页， 解析的节点提取数据
+ &lt;!-more&ndash;&gt;
+节点（node） 在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。
+以下面这xml文档为例：
+&lt;?xml …">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.25.1" />
+  <link rel="canonical" href="http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Xpath基本用法</h1>
+                
+                
+                  <span class="post-meta">
+  发表于 2017-07-31
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<blockquote>
+<p><code>xpath</code>在解析<code>html</code>, <code>xml</code>很方便， 例如用爬虫去爬网页， 解析的节点提取数据</p>
+</blockquote>
+
+<p>&lt;!-more&ndash;&gt;</p>
+
+<h2 id="节点-node">节点（node）</h2>
+
+<p>在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。</p>
+
+<p>以下面这xml文档为例：</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; 
+&lt;class&gt; 
+    &lt;student&gt; 
+        &lt;name gender=&quot;boy&quot;&gt;Harry Potter&lt;/name&gt; 
+        &lt;ID&gt;24&lt;/ID&gt; 
+    &lt;/student&gt;
+    &lt;student&gt;
+        &lt;name gender=&quot;girl&quot;&gt;Li Rose&lt;font color=red&gt;（monitor）&lt;/font&gt;&lt;/name&gt; 
+        &lt;ID&gt;1&lt;/ID&gt;
+    &lt;/student&gt;
+&lt;/class&gt;
+</code></pre>
+
+<p>上面例子的节点为：</p>
+
+<pre><code class="language-xml">&lt;classs&gt; （文档节点/根节点） 
+&lt;ID&gt;24&lt;/ID&gt; （元素节点） 
+gender=&quot;boy&quot; （属性节点）
+</code></pre>
+
+<p>节点关系</p>
+
+<p>父：每个元素以及属性都有一个父。例子中<student>的父是<class>;
+子：元素节点可有零个、一个或多个子。例子中<class>的子是<student>;
+兄弟：拥有相同的父的节点。例子中<name>和<ID>是兄弟;
+祖先：某节点的父、父的父，等等。
+后代：某节点的子、子的子，等等。</p>
+
+<h2 id="基本值-或称原子值-atomic-value">基本值（或称原子值，Atomic value）</h2>
+
+<p>基本值是无父或无子的节点。
+上面例子的基本值为：</p>
+
+<pre><code>Harry Potter &quot;boy&quot;
+</code></pre>
+
+<h2 id="项目-item">项目（Item）</h2>
+
+<p>项目是基本值或者节点。</p>
+
+<p><strong>注意，以下表达式当然可以混合使用</strong></p>
+
+<h3 id="1-nodename">1 nodename</h3>
+
+<p>选取此节点的所有子节点。</p>
+
+<pre><code class="language-python">from scrapy import Selector 
+def parse(self, response): 
+    selector=Selector(response) 
+    content=selector.xpath(class)# 选取 class 元素的所有子节点。
+</code></pre>
+
+<h3 id="2">2 /</h3>
+
+<p>从根节点选取。</p>
+
+<pre><code class="language-python">from scrapy import Selector 
+def parse(self, response): 
+    selector=Selector(response) 
+    ''' 选取根元素 class。 注释：假如路径起始于正斜杠( / )，则此路径始终代表到某元素的绝对路径！ ''' 
+    content1=selector.xpath(/class) 
+    content2=selector.xpath(/class/student)
+</code></pre>
+
+<h3 id="3">3 //</h3>
+
+<p>从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</p>
+
+<pre><code class="language-python">from scrapy import Selector 
+def parse(self, response): 
+    selector=Selector(response) 
+    content=selector.xpath(&quot;//ID&quot;)# 选取所有ID子元素，而不管它们在文档中的位置。
+</code></pre>
+
+<h3 id="4">4 .</h3>
+
+<p>选取当前节点。</p>
+
+<h3 id="5">5 ..</h3>
+
+<p>选取当前节点的父节点。</p>
+
+<h3 id="6">6 @</h3>
+
+<p>选取属性。</p>
+
+<pre><code class="language-python">from scrapy import Selector 
+def parse(self, response): 
+    selector=Selector(response) # 选取所有gender=&quot;boy&quot;属性的节点，而不管它们在文档中的位置。 
+    content=selector.xpath(//[@gender=&quot;boy&quot;])
+</code></pre>
+
+<h3 id="7-谓语-predicates">7 谓语（Predicates）</h3>
+
+<pre><code class="language-python">/class/student[1] #选取属于 class 子元素的第一个 student 元素。 
+/class/student[last()] #选取属于 class 子元素的最后一个 student 元素。 
+/class/student[last()-1] #选取属于 class 子元素的倒数第二个 student 元素。 
+/class/student[position()&lt;3] #选取属于 class 子元素的前两个 student 元素。 
+/class/student[@gender] #选取所有拥有名为 gender 的属性的 student 元素。 
+/class/student[@gender=&quot;boy&quot;] #选取所有拥有 gender=&quot;boy&quot; 属性的 student 元素。 
+/class/student[ID&lt;50] #选取 class 元素的所有 student 元素，且其中的 ID 元素的值须小于 50。 
+/class/student[ID&lt;50]/name #选取 class 元素中的 student 元素的所有 name 元素，且其中的 ID 元素的值须小于 35。
+</code></pre>
+
+<h3 id="8-通配符">8 通配符</h3>
+
+<pre><code>1. * 匹配任何元素节点 
+2. @* 匹配任何属性节点 
+3. node() 匹配任何类型的节点
+</code></pre>
+
+<h3 id="9-拓展">9 拓展</h3>
+
+<p>对于如下的xml文档（参照 <a href="http://www.tuicool.com/articles/iqQFBn">http://www.tuicool.com/articles/iqQFBn</a> ）</p>
+
+<pre><code class="language-html">&lt;div id=&quot;test2&quot;&gt;美女，&lt;font color=&quot;red&quot;&gt;你的微信是多少？&lt;/font&gt;&lt;div&gt;
+</code></pre>
+
+<p>如果使用：
+<code>data = selector.xpath('//div[@id=&quot;test2&quot;]/text()').extract()[0]</code>
+只能提取到&rdquo;美女，&rdquo;；</p>
+
+<p>如果使用：
+<code>data = selector.xpath('//div[@id=&quot;test2&quot;]/font/text()').extract()[0]</code>
+又只能提取到&rdquo;你的微信是多少？&rdquo;</p>
+
+<p>到底我们要怎样才能把“美女，你的微信是多少”提取出来？</p>
+
+<pre><code class="language-python">data = selector.xpath('//div[@id=&quot;test2&quot;]') 
+info = data.xpath('string(.)').extract()[0]
+</code></pre>
+
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/python%E8%AF%86%E5%88%AB%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/" data-toggle="tooltip" data-placement="top" title="Python识别网站技术">&larr; 前一篇</a>
+          </li>
+        
+        
+          <li class="next">
+            <a href="http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="Python命令参数解析">后一篇 &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.25.1</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

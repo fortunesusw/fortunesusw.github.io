@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Seo on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/seo/</link>
+    <description>Recent content in Seo on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Mon, 31 Jul 2017 19:47:48 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/seo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>自动化部署WordPress</title>
+      <link>http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/</link>
+      <pubDate>Mon, 31 Jul 2017 19:47:48 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2wordpress/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;用脚本实现自动部署&lt;code&gt;Mysql&lt;/code&gt;, &lt;code&gt;Apache&lt;/code&gt;, &lt;code&gt;PHP&lt;/code&gt;, &lt;code&gt;WordPress&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
