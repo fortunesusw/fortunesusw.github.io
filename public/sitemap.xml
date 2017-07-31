@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://sufuq.com/post/2017-07-31-git%E5%A4%87%E5%BF%98/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/post/2017-07-31-python-yield%E5%85%B3%E9%94%AE%E5%AD%97/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/page/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/tags/git/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/post/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/tags/python/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sufuq.com/tags/</loc>
+    <lastmod>2017-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
