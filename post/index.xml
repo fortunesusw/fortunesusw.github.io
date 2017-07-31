@@ -7,10 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Mon, 31 Jul 2017 19:47:48 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 31 Jul 2017 20:25:33 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>科学上网之Shadowsocks安装及优化加速</title>
+      <link>http://sufuq.com/post/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E4%B9%8Bshadowsocks%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8A%A0%E9%80%9F/</link>
+      <pubDate>Mon, 31 Jul 2017 20:25:33 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E4%B9%8Bshadowsocks%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8A%A0%E9%80%9F/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚拟主机、云主机与VPS区别</title>
+      <link>http://sufuq.com/post/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8Evps%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 31 Jul 2017 20:10:56 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E4%BA%91%E4%B8%BB%E6%9C%BA%E4%B8%8Evps%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;云主机和VPS主机的区别不是太大。简单说,云主机就类似于更高级的VPS主机产品，因为云主机是基于服务器集群架设的，云主机能支持在线升级，而且理论上来说,只要资源池充足，可以无限扩展云主机自身的性能。  肯定是云主机比VPS好的多，这点是毫无疑问的！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>自动化部署WordPress</title>
@@ -32,9 +54,11 @@
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;python中 getopt 模块，该模块是专门用来处理命令行参数的
-函数&lt;code&gt;getopt(args, shortopts, longopts = [])&lt;/code&gt;
-参数args一般是&lt;code&gt;sys.argv[1:]&lt;/code&gt;，shortopts 短格式 (-)， longopts 长格式(&amp;ndash;)&lt;/p&gt;
+&lt;p&gt;python中 getopt 模块，该模块是专门用来处理命令行参数的&lt;/p&gt;
+
+&lt;p&gt;函数&lt;code&gt;getopt(args, shortopts, longopts = [])&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;参数args一般是&lt;code&gt;sys.argv[1:]&lt;/code&gt;，shortopts 短格式 (-)， longopts 长格式(&amp;ndash;)&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,18 +70,11 @@
       <pubDate>Mon, 31 Jul 2017 19:35:04 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
-      <description>xpath在解析html, xml很方便， 例如用爬虫去爬网页， 解析的节点提取数据
- &amp;lt;!-more&amp;ndash;&amp;gt;
-节点（node） 在 XPath 中，有七种类型的节点：元素、属性、文本、命名空间、处理指令、注释以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。
-以下面这xml文档为例：
-&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;ISO-8859-1&amp;quot;?&amp;gt; &amp;lt;class&amp;gt; &amp;lt;student&amp;gt; &amp;lt;name gender=&amp;quot;boy&amp;quot;&amp;gt;Harry Potter&amp;lt;/name&amp;gt; &amp;lt;ID&amp;gt;24&amp;lt;/ID&amp;gt; &amp;lt;/student&amp;gt; &amp;lt;student&amp;gt; &amp;lt;name gender=&amp;quot;girl&amp;quot;&amp;gt;Li Rose&amp;lt;font color=red&amp;gt;（monitor）&amp;lt;/font&amp;gt;&amp;lt;/name&amp;gt; &amp;lt;ID&amp;gt;1&amp;lt;/ID&amp;gt; &amp;lt;/student&amp;gt; &amp;lt;/class&amp;gt;  上面例子的节点为：
-&amp;lt;classs&amp;gt; （文档节点/根节点） &amp;lt;ID&amp;gt;24&amp;lt;/ID&amp;gt; （元素节点） gender=&amp;quot;boy&amp;quot; （属性节点）  节点关系
-父：每个元素以及属性都有一个父。例子中的父是; 子：元素节点可有零个、一个或多个子。例子中的子是; 兄弟：拥有相同的父的节点。例子中和是兄弟; 祖先：某节点的父、父的父，等等。 后代：某节点的子、子的子，等等。
-基本值（或称原子值，Atomic value） 基本值是无父或无子的节点。 上面例子的基本值为：
-Harry Potter &amp;quot;boy&amp;quot;  项目（Item） 项目是基本值或者节点。
-注意，以下表达式当然可以混合使用
-1 nodename 选取此节点的所有子节点。
-from scrapy import Selector def parse(self, response): selector=Selector(response) content=selector.xpath(class)# 选取 class 元素的所有子节点。  2 / 从根节点选取。</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;xpath&lt;/code&gt;在解析&lt;code&gt;html&lt;/code&gt;, &lt;code&gt;xml&lt;/code&gt;很方便， 例如用爬虫去爬网页， 解析的节点提取数据&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
