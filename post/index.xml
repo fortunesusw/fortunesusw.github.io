@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Mon, 31 Jul 2017 21:04:19 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 03 Aug 2017 21:45:02 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PHP文件读写操作</title>
+      <link>http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Thu, 03 Aug 2017 21:45:02 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;p&gt;php文件读写方式多种， 这边做个记录， 方便查询&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java  Process的一些小坑</title>

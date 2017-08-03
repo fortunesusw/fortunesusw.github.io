@@ -5,20 +5,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>PHP文件读写操作</title>
+  <meta property="og:title" content="PHP文件读写操作" />
+  <meta name="twitter:title" content="PHP文件读写操作" />
+  <meta name="description" content="php文件读写方式多种， 这边做个记录， 方便查询
+
+">
+  <meta property="og:description" content="php文件读写方式多种， 这边做个记录， 方便查询
+
+">
+  <meta name="twitter:description" content="php文件读写方式多种， 这边做个记录， 方便查询
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -157,11 +166,18 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="post-heading">
               
-                <h1>Tags</h1>
+                <h1>PHP文件读写操作</h1>
               
                 
+                
+                  <span class="post-meta">
+  发表于 2017-08-03
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -172,53 +188,208 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>php文件读写方式多种， 这边做个记录， 方便查询</p>
+
+<p></p>
+
+<p>[TOC]</p>
+
+<h1 id="读取操作">读取操作</h1>
+
+<blockquote>
+<p>读取操作的函数有：</p>
+
+<ul>
+<li>fread()</li>
+<li>fgets()</li>
+<li>fgetc()</li>
+<li>file_get_contents()</li>
+<li>file()</li>
+</ul>
+</blockquote>
+
+<h2 id="fread">fread</h2>
+
+<blockquote>
+<p><code>fread()</code>函数用于读取文件（可安全用于二进制文件）。</p>
+</blockquote>
+
+<p>语法：</p>
+
+<pre><code class="language-php">string fread( int handle, int length )
+</code></pre>
+
+<p><code>fread()</code>从文件指针 <code>handle</code> 读取最多 <code>length</code> 个字节。当遇到下列任何一种情况时，会停止读取文件：</p>
+
+<ul>
+<li>在读取完最多 <code>length</code> 个字节数时</li>
+<li>达到文件末尾的时候（EOF）</li>
+<li>对于网络流，当一个包可用时 或（在打开用户空间流之后）已读取了 8192 个字节时</li>
+</ul>
+
+<p>例子：
+&gt; 从文件中读取 10 个字节（包括空格）：</p>
+
+<pre><code class="language-php">&lt;?php
+$filename = &quot;test.txt&quot;;
+$fh = fopen($filename, &quot;r&quot;);
+echo fread($fh, &quot;10&quot;);
+fclose($fh);
+?&gt;
+</code></pre>
+
+<p><strong>提示:如果只是想将一个文件的内容读入到一个字符串中，应该用性能更好的<code>file_get_contents</code></strong></p>
+
+<h2 id="fgets">fgets</h2>
+
+<blockquote>
+<p>fgets() 函数用于从文件中读取一行数据，并将文件指针指向下一行。</p>
+</blockquote>
+
+<p>语法：</p>
+
+<pre><code class="language-php">string fgets( int handle [, int length] )
+</code></pre>
+
+<p><code>fgets()</code> 从 <code>handle</code> 指向的文件中读取一行并返回长度最多为 <code>length-1</code> 字节的字符串。碰到换行符（包括在返回值中）、<code>EOF</code> 或者已经读取了 <code>length-1</code> 字节后停止。如果没有指定 <code>length</code> ，则默认为 <code>1K</code> ，或者说 <code>1024</code> 字节。</p>
+
+<p>例子：</p>
+
+<pre><code class="language-php">&lt;?php
+$fh = @fopen(&quot;test.txt&quot;,&quot;r&quot;) or die(&quot;打开 test.txt 文件出错！&quot;);
+// if条件避免无效指针
+if($fh){
+    while(!feof($fh)) {
+        echo fgets($fh), '&lt;br /&gt;';
+    }
+}
+fclose($fh);
+?&gt;
+</code></pre>
+
+<h2 id="fgetc">fgetc</h2>
+
+<blockquote>
+<p><code>fgetc()</code> 函数用于逐字读取文件数据，直到文件结束。</p>
+</blockquote>
+
+<p>语法：</p>
+
+<pre><code class="language-php">string fgetc( resource handle )
+</code></pre>
+
+<p>例子：</p>
+
+<pre><code class="language-php">&lt;?php
+$fh = @fopen(&quot;test.txt&quot;,&quot;r&quot;) or die(&quot;打开 test.txt 文件出错！&quot;);
+if($fh){
+    while(!feof($fh)) {
+        echo fgetc($fh);
+    }
+}
+fclose($fh);
+?&gt;
+</code></pre>
+
+<h2 id="file-get-contents">file_get_contents</h2>
+
+<blockquote>
+<p><code>file_get_contents()</code> 函数用于把整个文件读入一个字符串，成功返回一个字符串，失败则返回 FALSE。</p>
+</blockquote>
+
+<p>语法：</p>
+
+<pre><code class="language-php">string file_get_contents( string filename [, int offset [, int maxlen]] )
+</code></pre>
+
+<p>参数说明：</p>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>filename</td>
+<td>要读取的文件名称</td>
+</tr>
+
+<tr>
+<td>offset</td>
+<td>可选，指定读取开始的位置，默认为文件开始位置</td>
+</tr>
+
+<tr>
+<td>maxlen</td>
+<td>可选，指定读取文件的长度，单位字节</td>
+</tr>
+</tbody>
+</table>
+
+<p>例子：</p>
+
+<pre><code class="language-php">&lt;?php
+// 读取同时将换行符转换成 &lt;br /&gt;
+echo nl2br(file_get_contents('test.txt'));
+?&gt;
+</code></pre>
+
+<h2 id="file">file</h2>
+
+<blockquote>
+<p><code>file()</code> 函数用于把整个文件读入一个数组中，数组中的每个单元都是文件中相应的一行，包括换行符在内。成功返回一个数组，失败则返回 FALSE。</p>
+</blockquote>
+
+<p>语法：</p>
+
+<pre><code class="language-php">array file( string filename )
+</code></pre>
+
+<p>例子：</p>
+
+<pre><code class="language-php">&lt;?php
+$lines = file('test.txt');
+// 在数组中循环并加上行号
+foreach ($lines as $line_num =&gt; $line) {
+    echo &quot;Line #{$line_num} : &quot;,$line,'&lt;br /&gt;';
+}
+?&gt;
+</code></pre>
+
+<h1 id="文件写入">文件写入</h1>
+
+<p>对应读取， 写入操作的函数有：
+&gt;
+&gt; * fwrite()
+&gt; * fputs(fwrite别名)
+&gt; * file_put_contents()
+&gt; 操作方式与读取类似</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/java--process%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E5%9D%91/" data-toggle="tooltip" data-placement="top" title="Java  Process的一些小坑">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">4</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">1</span></a>
-      
-      <a href="/tags/php" class="list-group-item">
-          php<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
