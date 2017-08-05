@@ -24,12 +24,55 @@
     </item>
     
     <item>
+      <title>Python命令参数解析</title>
+      <link>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 04 Aug 2017 19:44:07 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;python中 getopt 模块，该模块是专门用来处理命令行参数的&lt;/p&gt;
+
+&lt;p&gt;函数&lt;code&gt;getopt(args, shortopts, longopts = [])&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;参数args一般是&lt;code&gt;sys.argv[1:]&lt;/code&gt;，shortopts 短格式 (-)， longopts 长格式(&amp;ndash;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>python yield关键字</title>
+      <link>http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;python yield关键字总结&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>PHP文件读写操作</title>
       <link>http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Thu, 03 Aug 2017 21:45:02 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/post/php%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/</guid>
       <description>&lt;p&gt;php文件读写方式多种， 这边做个记录， 方便查询&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Xpath基本用法</title>
+      <link>http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Wed, 02 Aug 2017 19:35:04 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;xpath&lt;/code&gt;在解析&lt;code&gt;html&lt;/code&gt;, &lt;code&gt;xml&lt;/code&gt;很方便， 例如用爬虫去爬网页， 解析的节点提取数据&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -198,36 +241,6 @@
     </item>
     
     <item>
-      <title>Python命令参数解析</title>
-      <link>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</link>
-      <pubDate>Mon, 31 Jul 2017 19:44:07 +0800</pubDate>
-      <author>fortunesusw@gmail.com (苏示水)</author>
-      <guid>http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;python中 getopt 模块，该模块是专门用来处理命令行参数的&lt;/p&gt;
-
-&lt;p&gt;函数&lt;code&gt;getopt(args, shortopts, longopts = [])&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;参数args一般是&lt;code&gt;sys.argv[1:]&lt;/code&gt;，shortopts 短格式 (-)， longopts 长格式(&amp;ndash;)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Xpath基本用法</title>
-      <link>http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
-      <pubDate>Mon, 31 Jul 2017 19:35:04 +0800</pubDate>
-      <author>fortunesusw@gmail.com (苏示水)</author>
-      <guid>http://sufuq.com/post/xpath%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;xpath&lt;/code&gt;在解析&lt;code&gt;html&lt;/code&gt;, &lt;code&gt;xml&lt;/code&gt;很方便， 例如用爬虫去爬网页， 解析的节点提取数据&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Python识别网站技术</title>
       <link>http://sufuq.com/post/python%E8%AF%86%E5%88%AB%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Mon, 31 Jul 2017 19:10:43 +0800</pubDate>
@@ -248,19 +261,6 @@
       <guid>http://sufuq.com/post/git%E5%A4%87%E5%BF%98/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;git 常用命令&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>python yield关键字</title>
-      <link>http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/</link>
-      <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
-      <author>fortunesusw@gmail.com (苏示水)</author>
-      <guid>http://sufuq.com/post/python-yield%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;python yield关键字总结&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
