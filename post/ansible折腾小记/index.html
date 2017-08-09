@@ -334,19 +334,13 @@ key=test
 
 <p>playbook引用</p>
 
-<h2 id="yaml">```yaml</h2>
-
-<ul>
-<li>hosts: merge
-gather_facts: False
-tasks:
-
-<ul>
-<li>name: display Host Variable from hostfile
-debug: msg=&ldquo;The key value is {{ key }}&rdquo;
-```</li>
-</ul></li>
-</ul></li>
+<pre><code>    ---
+    - hosts: merge
+      gather_facts: False
+      tasks:
+      - name: display Host Variable from hostfile
+        debug: msg=&quot;The key value is {{ key }}&quot;
+</code></pre></li>
 
 <li><p>通过文件定义主机以及主机组变量</p>
 
@@ -367,24 +361,18 @@ Ansible playbook内task之间可以互相传递数据，比如第2个task需要�
 
 <p>我们可以通过下面的方式：</p>
 
-<h2 id="yaml-1">```yaml</h2>
+<pre><code class="language-yaml">    ---
+    - hosts: merge
+    gather_facts: False
+    tasks:
+    - name: register variable
+        shell: hostname
+        register: info
+     - name: display variable
+        debug: msg=&quot;The key value is {{ info }}&quot;
+</code></pre>
 
-<ul>
-<li>hosts: merge
-gather_facts: False
-tasks:
-
-<ul>
-<li>name: register variable
-shell: hostname
-register: info</li>
-<li>name: display variable
-debug: msg=&ldquo;The key value is {{ info }}&rdquo;
-```
-info的结果是一段python字典数据，里面存储着很多信息，包括执行时间状态变化输出等。
-<br /></li>
-</ul></li>
-</ul></li>
+<p>info的结果是一段python字典数据，里面存储着很多信息，包括执行时间状态变化输出等。</p></li>
 </ol>
 
 <h3 id="变量的优先级">变量的优先级</h3>
@@ -403,71 +391,43 @@ info的结果是一段python字典数据，里面存储着很多信息，包括�
 <ol>
 <li><p>标准loops</p>
 
-<h2 id="yaml-2">```yaml</h2>
-
-<ul>
-<li>hosts: remote
-gather_facts: False
-tasks:
-
-<ul>
-<li>name: debug loops
-debug: msg=&ldquo;name &mdash;&mdash;&mdash;-&gt;  {{ item }}&rdquo;
-with_items:
-
-<ul>
-<li>one</li>
-<li>two
-```</li>
-</ul></li>
-</ul></li>
-</ul></li>
+<pre><code class="language-yaml">    ---
+    - hosts: remote
+      gather_facts: False
+      tasks:
+      - name: debug loops
+        debug: msg=&quot;name ----------&gt;  {{ item }}&quot;
+        with_items:
+          - one
+          - two
+</code></pre></li>
 
 <li><p>嵌套loops</p>
 
-<h2 id="yaml-3">```yaml</h2>
+<pre><code class="language-yaml">    ---
+    - hosts: remote
+      gather_facts: False
+      tasks:
+      - name: debug loops
+        debug: msg=&quot;name ----------&gt;  {{ item[0] }} ---------&gt; {{ item[1] }}&quot;
+        with_nested:
+          - ['A']
+          - ['a','b','c']
+</code></pre></li>
 
-<ul>
-<li>hosts: remote
-gather_facts: False
-tasks:
-
-<ul>
-<li>name: debug loops
-debug: msg=&ldquo;name &mdash;&mdash;&mdash;-&gt;  {{ item[0] }} &mdash;&mdash;&mdash;&gt; {{ item[1] }}&rdquo;
-with_nested:
-
-<ul>
-<li>[&lsquo;A&rsquo;]</li>
-<li>[&lsquo;a&rsquo;,&lsquo;b&rsquo;,&lsquo;c&rsquo;]
-<br /></li>
-</ul></li>
-</ul></li>
-</ul>
-
-<p>```</p>
-
-<ol>
 <li><p>条件判断loops</p>
 
-<h2 id="yaml-4">```yaml</h2>
-
-<ul>
-<li>hosts: remote
-gather_facts: False
-tasks:
-
-<ul>
-<li>name: debug loops
-shell: cat /root/test.txt
-register: host
-until: host.stdout.startswith(&ldquo;test&rdquo;)
-retries: 5
-delay: 5
-```</li>
-</ul></li>
-</ul></li>
-</ol></li>
+<pre><code class="language-yaml">    ---
+    - hosts: remote
+      gather_facts: False
+      tasks:
+      - name: debug loops
+        shell: cat /root/test.txt
+        register: host
+        until: host.stdout.startswith(&quot;test&quot;)
+        retries: 5
+        delay: 5
+</code></pre></li>
 </ol>
 
 <h3 id="playbook-lookups">playbook lookups</h3>
@@ -477,21 +437,15 @@ delay: 5
 <ol>
 <li><p>lookups file</p>
 
-<h2 id="yaml-5">```yaml</h2>
-
-<ul>
-<li>hosts: remote
-gather_facts: False
-vars:
-contents: &ldquo;{{ lookup(&lsquo;file&rsquo;, &lsquo;/root/openrc&rsquo;) }}&rdquo;
-tasks:
-
-<ul>
-<li>name: debug lookups
-debug: msg=&ldquo;The contents is {% for i in contents.split(&rdquo;\n&rdquo;) %} {{ i }} {% endfor %}&rdquo;
-```</li>
-</ul></li>
-</ul></li>
+<pre><code class="language-yaml">    ---
+    - hosts: remote
+      gather_facts: False
+      vars:
+        contents: &quot;{{ lookup('file', '/root/openrc') }}&quot;
+      tasks:
+      - name: debug lookups
+        debug: msg=&quot;The contents is {% for i in contents.split(&quot;\n&quot;) %} {{ i }} {% endfor %}&quot;
+</code></pre></li>
 
 <li><p>lookups password
 lookup(&lsquo;password&rsquo;, &lsquo;file_path&rsquo;)
