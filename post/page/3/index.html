@@ -5,23 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>PHP高效迭代处理大型数据集</title>
-  <meta property="og:title" content="PHP高效迭代处理大型数据集" />
-  <meta name="twitter:title" content="PHP高效迭代处理大型数据集" />
-  <meta name="description" content="php实践之生成器">
-  <meta property="og:description" content="php实践之生成器">
-  <meta name="twitter:description" content="php实践之生成器">
+  <title>Posts</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/post/php%E9%AB%98%E6%95%88%E8%BF%AD%E4%BB%A3%E5%A4%84%E7%90%86%E5%A4%A7%E5%9E%8B%E6%95%B0%E6%8D%AE%E9%9B%86/" />
+  <meta property="og:url" content="http://sufuq.com/post/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/post/php%E9%AB%98%E6%95%88%E8%BF%AD%E4%BB%A3%E5%A4%84%E7%90%86%E5%A4%A7%E5%9E%8B%E6%95%B0%E6%8D%AE%E9%9B%86/" />
+  <link rel="canonical" href="http://sufuq.com/post/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -150,39 +147,14 @@
 
 
     
-  
-  
-  
-
-
-
-
-  
-
   <header class="header-section ">
-    
     <div class="intro-header no-img">
-      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-heading">
-              
-                <h1 style="padding-bottom: 0; border-bottom: none;">PHP高效迭代处理大型数据集</h1>
-              
-                
-                  
-                    <h2 class="post-subheading">php实践之生成器</h2>
-                  
-                
-                
-                  <span class="post-meta">
-  发表于 2017-08-05
-  
-</span>
-
-
-                
+            <div class="page-heading">
+              <h1>Posts</h1>
+              <hr class="small">
             </div>
           </div>
         </div>
@@ -190,66 +162,58 @@
     </div>
   </header>
 
-
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>希望高效快速迭代处理一个元素列表， 不过整个列表会占用大量内存， 或者生成整个列表的速度非常慢</p>
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/">
+                <h2 class="post-title">git备忘</h2>
+    
+                
+              </a>
+    
+              <p class="post-meta">
+                发表于 2017-07-31
+              </p>
+              <div class="post-entry">
+                
+                  <blockquote>
+<p>git 常用命令</p>
+</blockquote>
 
 <p></p>
-
-<h2 id="解解办法">解解办法</h2>
-
-<p>使用生成器</p>
-
-<pre><code class="language-php">function FileLineGenerator($file) { 
-    if (!$fh = fopen($file, 'r')) {
-        return; 
-    }
-    while (false !== ($line = fgets($fh))) { 
-        yield $line;
-    }
-    fclose($fh);
-}
-$file = FileLineGenerator('log.txt'); 
-foreach ($file as $line) {
-    if (preg_match('/^rasmus: /', $line)) { 
-        print $line; 
-    }
-}
-</code></pre>
-
-<h2 id="讨论">讨论</h2>
-
-<p>生成器提供了一个简单的办法， 可以高效地循环处理元素， 而不是将所有数据加载到一个数组中导致巨大开销</p>
-
-<p>生成器是返回一个可迭代对象。 在循环处理对象时， PHP会反复调用生成器来得到下一个值， 这是<code>yield</code>关键字作用。</p>
-
-<p>生成器最适合来处理一个文件中的所有行， 最简单的方法是使用<code>file()</code>函数但这样会将所有行都加载到内存（数组）中， 然后关闭文件。</p>
-      </article>
-
-      <ul class="pager blog-pager">
+                  <a href="http://sufuq.com/post/git%E5%A4%87%E5%BF%98/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+    
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/git">git</a>&nbsp;
+                  
+                </span>
+              
+    
+            </article>
+          
+        </div>
         
-          <li class="previous">
-            <a href="http://sufuq.com/post/python%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="Python命令参数解析">&larr; 前一篇</a>
-          </li>
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="/post/page/2">&larr; 上一页</a>
+              </li>
+            
+            
+          </ul>
         
-        
-          <li class="next">
-            <a href="http://sufuq.com/post/nginx%E4%BB%8E%E5%90%AC%E8%AF%B4%E5%88%B0%E5%AD%A6%E4%BC%9A/" data-toggle="tooltip" data-placement="top" title="Nginx从听说到学会">后一篇 &rarr;</a>
-          </li>
-        
-      </ul>
-
-      
-        
-      
-
+      </div>
     </div>
   </div>
-</div>
 
     <footer>
   <div class="container">
