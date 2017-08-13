@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Wed, 09 Aug 2017 17:12:59 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Aug 2017 12:50:17 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DIG使用说明</title>
+      <link>http://sufuq.com/post/dig%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Sun, 13 Aug 2017 12:50:17 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/dig%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <description>&lt;p&gt;Dig(Domain Information Groper)域名信息查询工具是一个在类Unix命令行模式下查询DNS包括NS记录，A记录，MX记录等相关信息的工具&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Ansible折腾小记</title>
