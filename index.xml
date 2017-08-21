@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Fri, 18 Aug 2017 19:44:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Aug 2017 14:37:26 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SELinux安全系统基础</title>
+      <link>http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 21 Aug 2017 14:37:26 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/</guid>
+      <description>&lt;p&gt;操作系统的安全机制其实就是对两样东西做出限制：&lt;strong&gt;进程和系统资源&lt;/strong&gt;(文件、网络套接字、系统调用等)。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Scrapy Settings</title>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>SELinux安全系统基础</title>
+  <meta property="og:title" content="SELinux安全系统基础" />
+  <meta name="twitter:title" content="SELinux安全系统基础" />
+  <meta name="description" content="操作系统的安全机制其实就是对两样东西做出限制：进程和系统资源(文件、网络套接字、系统调用等)。
+
+">
+  <meta property="og:description" content="操作系统的安全机制其实就是对两样东西做出限制：进程和系统资源(文件、网络套接字、系统调用等)。
+
+">
+  <meta name="twitter:description" content="操作系统的安全机制其实就是对两样东西做出限制：进程和系统资源(文件、网络套接字、系统调用等)。
+
+">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.25.1" />
+  <link rel="canonical" href="http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Books" href="/page/books/">Books</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>SELinux安全系统基础</h1>
+              
+                
+                
+                  <span class="post-meta">
+  发表于 2017-08-21
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>操作系统的安全机制其实就是对两样东西做出限制：<strong>进程和系统资源</strong>(文件、网络套接字、系统调用等)。</p>
+
+<p></p>
+
+<h2 id="一-selinux简介">一、SELinux简介</h2>
+
+<p><code>SELinux(Secure Enhanced Linux)</code>安全增强的<code>Linux</code>是由美国国家安全局NSA针对计算机基础结构安全开发的一个全新的<code>Linux</code>安全策略机制。<code>SELinux</code>可以允许系统管理员更加灵活的来定义安全策略。</p>
+
+<p><code>SELinux</code>是一个内核级别的安全机制，从<code>Linux2.6</code>内核之后就将SELinux集成在了内核当中，因为SELinux是内核级别的，所以我们对于其配置文件的修改都是需要重新启动操作系统才能生效的。</p>
+
+<p>现在主流发现的Linux版本里面都集成了<code>SELinux</code>机制，<code>CentOS/RHEL</code>都会默认开启<code>SELinux</code>机制。</p>
+
+<h2 id="二-selinux基本概念">二、SELinux基本概念</h2>
+
+<p>Linux操作系统是通过用户和组的概念来对我们的系统资源进行限制，我们知道每个进程都需要一个用户才能执行。</p>
+
+<p>在<code>SELinux</code>当中针对这两样东西定义了两个基本概念：<code>域(domin)</code>和<code>上下文(context)</code>。</p>
+
+<p><strong>域就是用来对进程进行限制，而上下文就是对系统资源进行限制。</strong></p>
+
+<p>我们可以通过 <code>ps -Z</code>命令来查看当前进程的域的信息，也就是进程的SELinux信息：</p>
+
+<pre><code>[root@localhost ~] ps -Z
+LABEL                             PID TTY          TIME CMD
+unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 8473 pts/1 00:00:00 bash
+unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 17669 pts/1 00:00:00 ps
+</code></pre>
+
+<p>通过 <code>ls -Z</code> 命令我们可以查看文件上下文信息，也就是文件的SELinux信息：</p>
+
+<pre><code>[root@localhost ~] ls -Z
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 abc
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 access.com
+</code></pre>
+
+<pre><code>unconfined_u:object_r:admin_home_t:s0
+
+这条语句通过：划分成了四段，第一段 unconfined_u 代表的是用户，第二段 object_r 表示的是角色，第三段是SELinux中最重要的信息，admin_home 表示的是类型，最后一段 s0 是跟MLS、MCS相关的东西
+</code></pre>
+
+<ul>
+<li><p>unconfined_u: 指的是<code>SElinux</code>用户，<code>root</code>表示<code>root</code>账户身份，<code>user_u</code>表示普通用户无特权用户，<code>system_u</code>表示系统进程，通过用户可以确认身份类型，一般搭配角色使用。身份和不同的角色搭配时有权限不同，虽然可以使用su命令切换用户但对于SElinux的用户并没有发生改变，账户之间切换时此用户身份不变，在targeted策略环境下用户标识没有实质性作用。</p></li>
+
+<li><p>object_r: <code>object_r</code>一般为文件目录的角色、<code>system_r</code>一般为进程的角色，在targeted策略环境中用户的角色一般为<code>system_r</code>。用户的角色类似用户组的概念，不同的角色具有不同的身份权限，一个用户可以具备多个角色，但是同一时间只能使用一个角色。在targeted策略环境下角色没有实质作用，在targeted策略环境中所有的进程文件的角色都是<code>system_r</code>角色。</p></li>
+
+<li><p>admin_home: 文件和进程都有一个类型，<code>SElinux</code>依据类型的相关组合来限制存取权限。</p></li>
+</ul>
+
+<h2 id="三-策略">三、策略</h2>
+
+<p>在<code>SELinux</code>中，我们是通过定义策略来控制哪些域可以访问哪些上下文。</p>
+
+<p>在<code>SELinux</code>中，预置了多种的策略模式，我们通常都不需要自己去定义策略，除非是我们自己需要对一些服务或者程序进行保护</p>
+
+<p>在<code>CentOS/RHEL</code>中，其默认使用的是目标(target)策略，那么何为目标策略呢？</p>
+
+<p>目标策略定义了只有目标进程受到<code>SELinux</code>限制，非目标进程就不会受到SELinux限制，通常我们的网络应用程序都是目标进程，比如<code>httpd</code>、<code>mysqld</code>，<code>dhcpd</code>等等这些网络应用程序。</p>
+
+<p>我们的<code>CentOS</code>的<code>SELinux</code>配置文件是存放在 <code>/etc/sysconfig/selinux</code> 文件，我们可以查看一下里面的内容：</p>
+
+<pre><code>[root@localhost ~] cat /etc/sysconfig/selinux
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=enforcing    #SELinux默认的工作模式是enforcing
+# SELINUXTYPE= can take one of these two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted  #CentOS使用的策略就是目标策略
+</code></pre>
+
+<h2 id="四-selinux模式">四、 SELinux模式</h2>
+
+<p>配置文件<code>/etc/sysconfig/selinux</code></p>
+
+<p><code>SELinux</code>的工作模式一共有三种 <code>enforcing</code>、<code>permissive</code>和<code>disabled</code></p>
+
+<ul>
+<li>enforcing(强制模式)：只要是违反策略的行动都会被禁止，并作为内核信息记录</li>
+<li>permissive(允许模式)：违反策略的行动不会被禁止，但是会提示警告信息</li>
+<li>disabled(禁用模式)：禁用<code>SELinux</code>，与不带<code>SELinux</code>系统是一样的，通常情况下我们在不怎么了解<code>SELinux</code>时，将模式设置成<code>disabled</code>，这样在访问一些网络应用时就不会出问题了。</li>
+</ul>
+
+<p>我们如果要查看当前<code>SELinux</code>的工作状态，可以使用 <code>getenforce</code> 命令来查看：</p>
+
+<pre><code>[root@localhost ~] getenforce
+Enforcing
+</code></pre>
+
+<p>当前的工作模式是 <code>enforcing</code>，我们如果要设置当前的<code>SELinux</code>工作状态，可以使用 <code>setenforce [0|1]</code> 命令来修改，<code>setenforce 0</code>表示设置成 <code>permissive</code>，1表示<code>enforcing</code></p>
+
+<p><strong>【注意：】通过 <code>setenforce</code> 来设置<code>SELinux</code>只是临时修改，当系统重启后就会失效了，所以如果要永久修改，就通过修改<code>SELinux</code>主配置文件</strong></p>
+
+<pre><code>[root@localhost ~] getenforce
+Permissive
+[root@localhost ~] getenforce 1
+Permissive
+[root@localhost ~] setenforce 1
+[root@localhost ~] getenforce
+Enforcing
+</code></pre>
+
+<h2 id="五-实例">五、 实例</h2>
+
+<pre><code>[root@localhost ~] ls -Z -d /var
+drwxr-xr-x. root root system_u:object_r:var_t:s0       /var
+[root@localhost ~] ls -Z -d /var/www/
+drwxrwxrwx. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/
+[root@localhost ~] ls -Z -d /var/www/html/
+drwxrwxrwx. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/
+[root@localhost ~] ls -Z -d /var/www/html/plibli/
+drwxrwxrwx. apache apache unconfined_u:object_r:httpd_sys_content_t:s0 /var/www/html/plibli/
+</code></pre>
+
+<p><strong>一般情况下它们会继承上一级目录的context值，但是，一些安装服务产生的文件context值会例外，不继承上级目录的context值，服务会自动创建它们的context值，比如没有装http服务的时候/var/目录下时没有www目录的，安装httpd服务后该服务会自动创建出所需的目录，并定义与服务相关的目录及文件才context值，它们并不会继承上级目录的context值。</strong></p>
+
+<p>当访问<code>plibli</code>时， 会出现无法写， 因为我们此时的<code>SELinux</code>的工作模式是 <code>enforcing</code>，所以对于违反策略的行动是被禁止的。</p>
+
+<p>那么我们这个时候应该解决这个问题呢？</p>
+
+<p>通常解决办法由两种：</p>
+
+<ol>
+<li><p>直接将<code>SELinux</code>的工作模式设置成 <code>disabled</code>，这样就不会出现策略拦截问题了，但是这样的话我们的系统就没有<code>SELinux</code>安全防护了</p></li>
+
+<li><p>通过 <code>restorecon</code> 或者 <code>chcon</code> 命令来修复我们的文件上下文信息</p></li>
+</ol>
+
+<pre><code>restorecon -R -v /var/www/html/plibli　　//-R 表示递归，如果是目录，则该目录下的所有子目录、文件都会得到修复　　
+
+chcon -R -u system_u plibli
+</code></pre>
+
+<h2 id="参照">参照</h2>
+
+<ul>
+<li><a href="http://www.cnblogs.com/xiaoluo501395377/archive/2013/05/26/3100444.html">SELinux安全系统基础</a></li>
+<li><a href="https://wiki.centos.org/zh/HowTos/SELinux">SELinux</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Targeted_Policy-Confined_and_Unconfined_Users.html">Confined and Unconfined Users
+</a></li>
+</ul>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/scrapy-settings/" data-toggle="tooltip" data-placement="top" title="Scrapy Settings">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.25.1</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+
