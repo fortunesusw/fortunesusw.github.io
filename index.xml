@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Mon, 21 Aug 2017 14:37:26 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Aug 2017 14:47:51 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在Linux上使用PHPCMS的踩坑记录</title>
+      <link>http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 21 Aug 2017 14:47:51 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;环境：centos7&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;最近在使用phpcms(feifeicms)，内部基于&lt;code&gt;Thinkphp&lt;/code&gt;。
+安装很简单，直接下载最新包扔上去， 但在启动时，报了&lt;code&gt;目录 [ ./Runtime/ ] 不可写！&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SELinux安全系统基础</title>

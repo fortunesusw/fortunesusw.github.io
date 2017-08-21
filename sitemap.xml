@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2017-08-21T14:37:26+08:00</lastmod>
   </url>
@@ -134,7 +139,7 @@
   
   <url>
     <loc>http://sufuq.com/</loc>
-    <lastmod>2017-08-21T14:37:26+08:00</lastmod>
+    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
   </url>
   
   <url>
@@ -190,7 +195,7 @@
   
   <url>
     <loc>http://sufuq.com/tags/linux/</loc>
-    <lastmod>2017-08-21T14:37:26+08:00</lastmod>
+    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,13 +218,13 @@
   
   <url>
     <loc>http://sufuq.com/tags/php/</loc>
-    <lastmod>2017-08-05T15:12:53+08:00</lastmod>
+    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://sufuq.com/post/</loc>
-    <lastmod>2017-08-21T14:37:26+08:00</lastmod>
+    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   

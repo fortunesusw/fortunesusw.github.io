@@ -5,20 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>在Linux上使用PHPCMS的踩坑记录</title>
+  <meta property="og:title" content="在Linux上使用PHPCMS的踩坑记录" />
+  <meta name="twitter:title" content="在Linux上使用PHPCMS的踩坑记录" />
+  <meta name="description" content="Linux下目录权限设置">
+  <meta property="og:description" content="Linux下目录权限设置">
+  <meta name="twitter:description" content="Linux下目录权限设置">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.25.1" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -163,11 +166,22 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="post-heading">
               
-                <h1>Tags</h1>
+                <h1 style="padding-bottom: 0; border-bottom: none;">在Linux上使用PHPCMS的踩坑记录</h1>
               
                 
+                  
+                    <h2 class="post-subheading">Linux下目录权限设置</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  发表于 2017-08-21
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -178,65 +192,52 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><strong>环境：centos7</strong></p>
+
+<p>最近在使用phpcms(feifeicms)，内部基于<code>Thinkphp</code>。
+安装很简单，直接下载最新包扔上去， 但在启动时，报了<code>目录 [ ./Runtime/ ] 不可写！</code>。</p>
+
+<p></p>
+
+<h2 id="查找问题及解决办法">查找问题及解决办法</h2>
+
+<p>看到不可写， 首先想到的是权限问题， 直接<code>chown -R 777 Runtime</code>，赋予最高权限， 打开浏览器， 还是<code>目录 [ ./Runtime/ ] 不可写！</code>， 在<code>chown -R xxx:xxx Runtime</code>，还是不行。</p>
+
+<p>因为是使用apache web服务， 所以也折腾了下apache的权限设置， 也解决不了。</p>
+
+<p>google&hellip;.继续google&hellip;.</p>
+
+<p>终于找到关键字眼<a href="http://www.cnblogs.com/batsing/p/Thinkphp.html">攻城记：Thinkphp框架的项目规划总结和踩坑经验</a>，里面提到权限问题，<code>Runtime</code>目录设置<code>777</code>权限， 如果仍不能正常生成缓存文件，检查是否硬盘已满。若系统为<code>centos7</code>，则要关闭 <code>selinux</code> 防火墙。</p>
+
+<p><a href="http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">selinux安全系统基础</a></p>
+
+<p><code>chcon</code>还是不能解决， 后面直接把<code>SELinux</code>的工作模式改为<code>disabled</code>， 这个需要重启机器。</p>
+
+<p>折腾了2天多， 没找到合适的解决办法， 直接关掉selinux的安全验证，比较暴力， 不推荐</p>
+
+<p>在此记录下折腾过程， 防止后面遇到类似问题。</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/selinux%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" data-toggle="tooltip" data-placement="top" title="SELinux安全系统基础">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">5</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">3</span></a>
-      
-      <a href="/tags/php" class="list-group-item">
-          php<span class="badge">3</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/ansible" class="list-group-item">
-          ansible<span class="badge">1</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/dns" class="list-group-item">
-          dns<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/nginx" class="list-group-item">
-          nginx<span class="badge">1</span></a>
-      
-      <a href="/tags/scrapy" class="list-group-item">
-          scrapy<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
