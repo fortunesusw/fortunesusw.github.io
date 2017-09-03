@@ -5,20 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Shell</title>
-  <meta property="og:title" content="Shell" />
-  <meta name="twitter:title" content="Shell" />
+  <title>Mac上 Php Debug的坑</title>
+  <meta property="og:title" content="Mac上 Php Debug的坑" />
+  <meta name="twitter:title" content="Mac上 Php Debug的坑" />
+  <meta name="description" content="之前使用nginx &#43; apache， debug相当畅快。 后面为了方便，直接使用nginx &#43; php-fpm。
+
+nginx部署自不必说， 没问题， 但部署完php-fpm， 便不能debug了&hellip;
+
+码代码不能debug， 就像脱光不能XX一样， 难受， 特别是对开源的或者其他项目做二次开发。
+
+">
+  <meta property="og:description" content="之前使用nginx &#43; apache， debug相当畅快。 后面为了方便，直接使用nginx &#43; php-fpm。
+
+nginx部署自不必说， 没问题， 但部署完php-fpm， 便不能debug了&hellip;
+
+码代码不能debug， 就像脱光不能XX一样， 难受， 特别是对开源的或者其他项目做二次开发。
+
+">
+  <meta name="twitter:description" content="之前使用nginx &#43; apache， debug相当畅快。 后面为了方便，直接使用nginx &#43; php-fpm。
+
+nginx部署自不必说， 没问题， 但部署完php-fpm， 便不能debug了&hellip;
+
+码代码不能debug， 就像脱光不能XX一样， 难受， 特别是对开源的或者其他项目做二次开发。
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/shell/" />
+  <meta property="og:url" content="http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.26" />
-  <link rel="canonical" href="http://sufuq.com/tags/shell/" />
+  <link rel="canonical" href="http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -147,14 +168,35 @@
 
 
     
+  
+  
+  
+
+
+
+
+  
+
   <header class="header-section ">
+    
     <div class="intro-header no-img">
+      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>#Shell</h1>
-              <hr class="small">
+            <div class="post-heading">
+              
+                <h1>Mac上 Php Debug的坑</h1>
+              
+                
+                
+                  <span class="post-meta">
+  发表于 2017-09-03
+  
+</span>
+
+
+                
             </div>
           </div>
         </div>
@@ -162,82 +204,61 @@
     </div>
   </header>
 
+
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="posts-list">
-          
-            <article class="post-preview">
-              <a href="http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/">
-                <h2 class="post-title">脚本工具集</h2>
-    
-                
-              </a>
-    
-              <p class="post-meta">
-                发表于 2017-07-31
-              </p>
-              <div class="post-entry">
-                
-                  <blockquote>
-<p>整理日常比较常用的脚本，提高效率</p>
-</blockquote>
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>之前使用nginx + apache， debug相当畅快。 后面为了方便，直接使用nginx + php-fpm。</p>
+
+<p>nginx部署自不必说， 没问题， 但部署完php-fpm， 便不能debug了&hellip;</p>
+
+<p>码代码不能debug， 就像脱光不能XX一样， 难受， 特别是对开源的或者其他项目做二次开发。</p>
 
 <p></p>
-                  <a href="http://sufuq.com/post/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7%E9%9B%86/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-    
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/shell">shell</a>&nbsp;
-                  
-                </span>
-              
-    
-            </article>
-          
-            <article class="post-preview">
-              <a href="http://sufuq.com/post/shell%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                <h2 class="post-title">Shell简单模拟多线程</h2>
-    
-                
-              </a>
-    
-              <p class="post-meta">
-                发表于 2017-07-31
-              </p>
-              <div class="post-entry">
-                
-                  <blockquote>
-<p>使用场景，跑一批数据，对这批数据做检查等，如对一批视频url做下载请求等等</p>
-</blockquote>
 
-<p></p>
-                  <a href="http://sufuq.com/post/shell%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-    
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/shell">shell</a>&nbsp;
-                  
-                    #<a href="/tags/linux">linux</a>&nbsp;
-                  
-                </span>
-              
-    
-            </article>
-          
-        </div>
+<p>在使用<code>apache</code>好好的， 切换到<code>php-fpm</code>就出问题了。</p>
+
+<p>马上google找解决办法， 找了很多， 试了却不生效， 搞到昨天凌晨3点多， 第二天继续找问题， 终于在刚才解决了， 时间流水啊， 肉疼。</p>
+
+<p>感慨对<code>php</code>不熟悉啊， 不像<code>java</code>， 随便撸，都能得以解决。</p>
+
+<h2 id="问题原因">问题原因</h2>
+
+<p>由于mac有自带的<code>php php-fpm</code>，但扩展这些都没有， 由于不了解， 自带的<code>php-fpm</code>不能debug， 所以折腾了一天多。</p>
+
+<p>解决过程不堪回首， 各种安装， 各种<code>ln -s</code>某些包， 还是没成功， 后面直接把<code>mysql、php</code>卸载重新安装， 包括<code>xdebug</code>。 竟然OK了， WTF&hellip;.</p>
+
+<p>其中重新安装的php命令</p>
+
+<pre><code>#5.6版本有自带fpm
+brew install php56 --with-debug --with-homebrew-curl --with-homebrew-libressl --with-homebrew-libxslt  --with-libmysql --without-apache
+</code></pre>
+
+<pre><code>#fpm启动， 千万不能使用/usr/sbin/php-fpm mac上自带的。。。大坑
+/usr/local/sbin/php-fpm -c /usr/local/etc/php/5.6/php.ini -y /usr/local/etc/php/5.6/php-fpm.conf -D
+</code></pre>
+
+<p>mac虽然方便， 但坑起来也折腾啊。。。。</p>
+      </article>
+
+      <ul class="pager blog-pager">
         
-      </div>
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" data-toggle="tooltip" data-placement="top" title="在Linux上使用PHPCMS的踩坑记录">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

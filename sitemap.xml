@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2017-09-03T18:10:20+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sufuq.com/post/%E5%9C%A8linux%E4%B8%8A%E4%BD%BF%E7%94%A8phpcms%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2017-08-21T14:47:51+08:00</lastmod>
   </url>
@@ -139,7 +144,7 @@
   
   <url>
     <loc>http://sufuq.com/</loc>
-    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
+    <lastmod>2017-09-03T18:10:20+08:00</lastmod>
   </url>
   
   <url>
@@ -218,13 +223,13 @@
   
   <url>
     <loc>http://sufuq.com/tags/php/</loc>
-    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
+    <lastmod>2017-09-03T18:10:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://sufuq.com/post/</loc>
-    <lastmod>2017-08-21T14:47:51+08:00</lastmod>
+    <lastmod>2017-09-03T18:10:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -267,6 +272,12 @@
   <url>
     <loc>http://sufuq.com/tags/unittest/</loc>
     <lastmod>2017-07-31T20:42:26+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://sufuq.com/tags/xdebug/</loc>
+    <lastmod>2017-09-03T18:10:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   

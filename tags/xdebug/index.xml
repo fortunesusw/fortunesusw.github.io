@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xdebug on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/xdebug/</link>
+    <description>Recent content in Xdebug on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Sun, 03 Sep 2017 18:10:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/xdebug/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac上 Php Debug的坑</title>
+      <link>http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/</link>
+      <pubDate>Sun, 03 Sep 2017 18:10:20 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/</guid>
+      <description>&lt;p&gt;之前使用nginx + apache， debug相当畅快。 后面为了方便，直接使用nginx + php-fpm。&lt;/p&gt;
+
+&lt;p&gt;nginx部署自不必说， 没问题， 但部署完php-fpm， 便不能debug了&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;码代码不能debug， 就像脱光不能XX一样， 难受， 特别是对开源的或者其他项目做二次开发。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
