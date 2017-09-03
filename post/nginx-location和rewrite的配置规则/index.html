@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Nginx Location和rewrite的配置规则</title>
+  <meta property="og:title" content="Nginx Location和rewrite的配置规则" />
+  <meta name="twitter:title" content="Nginx Location和rewrite的配置规则" />
+  <meta name="description" content="location、rewrite配置">
+  <meta property="og:description" content="location、rewrite配置">
+  <meta name="twitter:description" content="location、rewrite配置">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/nginx-location%E5%92%8Crewrite%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.26" />
+  <link rel="canonical" href="http://sufuq.com/post/nginx-location%E5%92%8Crewrite%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Books" href="/page/books/">Books</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1 style="padding-bottom: 0; border-bottom: none;">Nginx Location和rewrite的配置规则</h1>
+              
+                
+                  
+                    <h2 class="post-subheading">location、rewrite配置</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  发表于 2017-09-03
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p></p>
+
+<h2 id="location正则写法">location正则写法</h2>
+
+<pre><code class="language-nginx">location  = / {
+  # 精确匹配 / ，主机名后面不能带任何字符串
+  [ configuration A ]
+}
+location  / {
+  # 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求
+  # 但是正则和最长字符串会优先匹配
+  [ configuration B ]
+}
+location /documents/ {
+  # 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索
+  # 只有后面的正则表达式没有匹配到时，这一条才会采用这一条
+  [ configuration C ]
+}
+location ~ /documents/Abc {
+  # 匹配任何以 /documents/Abc 开头的地址，匹配符合以后，还要继续往下搜索
+  # 只有后面的正则表达式没有匹配到时，这一条才会采用这一条
+  [ configuration CC ]
+}
+location ^~ /images/ {
+  # 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。
+  [ configuration D ]
+}
+location ~* \.(gif|jpg|jpeg)$ {
+  # 匹配所有以 gif,jpg或jpeg 结尾的请求
+  # 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则
+  [ configuration E ]
+}
+location /images/ {
+  # 字符匹配到 /images/，继续往下，会发现 ^~ 存在
+  [ configuration F ]
+}
+location /images/abc {
+  # 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在
+  # F与G的放置顺序是没有关系的
+  [ configuration G ]
+}
+location ~ /images/abc/ {
+  # 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用
+    [ configuration H ]
+}
+location ~* /js/.*/\.js
+</code></pre>
+
+<ul>
+<li>以 <code>=</code> 开头表示精确匹配</li>
+<li>如 <code>A</code> 中只匹配根目录结尾的请求，后面不能带任何字符串。</li>
+<li><code>^~</code> 开头表示<code>uri</code>以某个常规字符串开头，不是正则匹配</li>
+<li><code>~</code> 开头表示区分大小写的正则匹配;</li>
+<li><code>~*</code> 开头表示不区分大小写的正则匹配</li>
+<li><code>/</code> 通用匹配, 如果没有其它匹配,任何请求都会匹配到</li>
+</ul>
+
+<p><strong>优先级：</strong></p>
+
+<pre><code>(location =) &gt; (location 完整路径) &gt; (location ^~ 路径) &gt; (location ~,~* 正则顺序) &gt; (location 部分起始路径) &gt; (/)
+</code></pre>
+
+<h3 id="例子">例子</h3>
+
+<pre><code>/ -&gt; config A
+精确完全匹配，即使/index.html也匹配不了
+
+/downloads/download.html -&gt; config B
+匹配B以后，往下没有任何匹配，采用B
+
+/images/1.gif -&gt; configuration D
+匹配到F，往下匹配到D，停止往下
+
+/images/abc/def -&gt; config D
+最长匹配到G，往下匹配D，停止往下
+你可以看到 任何以/images/开头的都会匹配到D并停止，FG写在这里是没有任何意义的，H是永远轮不到的，这里只是为了说明匹配顺序
+
+/documents/document.html -&gt; config C
+匹配到C，往下没有任何匹配，采用C
+
+/documents/1.jpg -&gt; configuration E
+匹配到C，往下正则匹配到E
+
+/documents/Abc.jpg -&gt; config CC  
+最长匹配到C，往下正则顺序匹配到CC，不会往下到E (为什么不会匹配到E)
+</code></pre>
+
+<h2 id="rewrite规则">Rewrite规则</h2>
+
+<p><code>rewrite</code>功能就是，使用<code>nginx</code>提供的全局变量或自己设置的变量，结合正则表达式和标志位实现<code>url</code>重写以及重定向。<code>rewrite</code>只能放在<code>server{}</code>,<code>location{}</code>,<code>if{}</code>中，并且只能对<code>path</code>，例如 <code>http://seanlook.com/a/we/index.php?id=1&amp;u=str</code> 只对<code>/a/we/index.php</code>重写。语法<code>rewrite regex replacement [flag]</code>。</p>
+
+<p>如果相对域名或参数字符串起作用，可以使用全局变量匹配，也可以使用<code>proxy_pass</code>反向代理。</p>
+
+<p><code>rewrite</code>和<code>location</code>功能有点像，都能实现跳转，主要区别在于<code>rewrite</code>是在同一域名内更改获取资源的路径，而<code>location</code>是对一类路径做控制访问或反向代理，可以<code>proxy_pass</code>到其他机器。很多情况下<code>rewrite</code>也会写在<code>location</code>里，它们的执行顺序是：</p>
+
+<ol>
+<li>执行server块的rewrite指令</li>
+<li>执行location匹配</li>
+<li>执行选定的location中的rewrite指令</li>
+</ol>
+
+<p>如果其中某步<code>URI</code>被重写，则重新循环执行1-3，直到找到真实存在的文件；循环超过10次，则返回<code>500 Internal Server Error</code>错误。</p>
+
+<h3 id="flag标志们">flag标志们</h3>
+
+<ul>
+<li><code>last</code> : 相当于<code>Apache</code>的<code>[L]</code>标记，表示完成<code>rewrite</code></li>
+<li><code>break</code> : 停止执行当前虚拟主机的后续rewrite指令集</li>
+<li><code>redirect</code> : 返回302临时重定向，地址栏会显示跳转后的地址</li>
+<li><code>permanent</code> : 返回301永久重定向，地址栏会显示跳转后的地址</li>
+</ul>
+
+<p>因为301和302不能简单的只返回状态码，还必须有重定向的URL，这就是return指令无法返回301,302的原因了。</p>
+
+<p><strong><code>last</code> 与 <code>break</code>的区别：</strong>
+1. <code>last</code>一般写在<code>server</code>和<code>if</code>中，而<code>break</code>一般使用在<code>location</code>中
+2. <code>last</code>不终止重写后的<code>url</code>匹配，即新的<code>url</code>会再从<code>server</code>走一遍匹配流程，而<code>break</code>终止重写后的匹配
+3. <code>break</code>和<code>last</code>都能组织继续执行后面的<code>rewrite</code>指令</p>
+
+<h3 id="if指令和全局变量">if指令和全局变量</h3>
+
+<p><strong>if判断指令</strong></p>
+
+<p>语法为<code>if(condition){...}</code>，对给定的条件<code>condition</code>进行判断。如果为真，大括号内的<code>rewrite</code>指令将被执行，if条件(conditon)可以是如下任何内容：</p>
+
+<ul>
+<li>当表达式只是一个变量时，如果值为空或任何以0开头的字符串都会当做false</li>
+<li>直接比较变量和内容时，使用=或!=</li>
+<li>~正则表达式匹配，~*不区分大小写的匹配，!~区分大小写的不匹配</li>
+</ul>
+
+<pre><code>-f和!-f用来判断是否存在文件
+-d和!-d用来判断是否存在目录
+-e和!-e用来判断是否存在文件或目录
+-x和!-x用来判断文件是否可执行
+</code></pre>
+
+<p>例如：</p>
+
+<pre><code class="language-nginx">if ($http_user_agent ~ MSIE) {
+    rewrite ^(.*)$ /msie/$1 break;
+} //如果UA包含&quot;MSIE&quot;，rewrite请求到/msid/目录下
+if ($http_cookie ~* &quot;id=([^;]+)(?:;|$)&quot;) {
+    set $id $1;
+ } //如果cookie匹配正则，设置变量$id等于正则引用部分
+if ($request_method = POST) {
+    return 405;
+} //如果提交方法为POST，则返回状态405（Method not allowed）。return不能返回301,302
+if ($slow) {
+    limit_rate 10k;
+} //限速，$slow可以通过 set 指令设置
+if (!-f $request_filename){
+    break;
+    proxy_pass  http://127.0.0.1;
+} //如果请求的文件名不存在，则反向代理到localhost 。这里的break也是停止rewrite检查
+if ($args ~ post=140){
+    rewrite ^ http://example.com/ permanent;
+} //如果query string中包含&quot;post=140&quot;，永久重定向到example.com
+location ~* \.(gif|jpg|png|swf|flv)$ {
+    valid_referers none blocked www.jefflei.com www.leizhenfang.com;
+    if ($invalid_referer) {
+        return 404;
+    } //防盗链
+}
+</code></pre>
+
+<p><strong>全局变量</strong></p>
+
+<p>下面是可以用作if判断的全局变量</p>
+
+<ul>
+<li><code>$args</code> ： #这个变量等于请求行中的参数，同<code>$query_string</code></li>
+<li><code>$content_length</code> ： 请求头中的<code>Content-length</code>字段。</li>
+<li><code>$content_type</code> ： 请求头中的<code>Content-Type</code>字段。</li>
+<li><code>$document_root</code> ： 当前请求在<code>roo</code>t指令中指定的值。</li>
+<li><code>$host</code> ： 请求主机头字段，否则为服务器名称。</li>
+<li><code>$http_user_agent</code> ： 客户端<code>agent</code>信息</li>
+<li><code>$http_cookie</code> ： 客户端<code>cookie</code>信息</li>
+<li><code>$limit_rate</code> ： 这个变量可以限制连接速率。</li>
+<li><code>$request_method</code> ： 客户端请求的动作，通常为<code>GET</code>或<code>POST</code>。</li>
+<li><code>$remote_addr</code> ： 客户端的IP地址。</li>
+<li><code>$remote_port</code> ： 客户端的端口。</li>
+<li><code>$remote_user</code> ： 已经经过<code>Auth Basic Module</code>验证的用户名。</li>
+<li><code>$request_filename</code> ： 当前请求的文件路径，由<code>root</code>或<code>alias</code>指令与<code>URI</code>请求生成。</li>
+<li><code>$scheme</code> ： <code>HTTP</code>方法（如<code>http</code>，<code>https</code>）。</li>
+<li><code>$server_protocol</code> ： 请求使用的协议，通常是<code>HTTP/1.0</code>或<code>HTTP/1.1</code>。</li>
+<li><code>$server_addr</code> ： 服务器地址，在完成一次系统调用后可以确定这个值。</li>
+<li><code>$server_name</code> ： 服务器名称。</li>
+<li><code>$server_port</code> ： 请求到达服务器的端口号。</li>
+<li><code>$request_uri</code> ： 包含请求参数的原始<code>URI</code>，不包含主机名，如：<code>/foo/bar.php?arg=baz</code>。</li>
+<li><code>$uri</code> ： 不带请求参数的当前URI，$uri不包含主机名，如”/foo/bar.html”。</li>
+<li><code>$document_uri</code> ： 与$uri相同。</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="http://seanlook.com/2015/05/17/nginx-location-rewrite/">nginx配置location总结及rewrite规则写法</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/mac%E4%B8%8A-php-debug%E7%9A%84%E5%9D%91/" data-toggle="tooltip" data-placement="top" title="Mac上 Php Debug的坑">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.26</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

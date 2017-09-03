@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Sun, 03 Sep 2017 18:10:20 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Sep 2017 18:14:40 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Nginx Location和rewrite的配置规则</title>
+      <link>http://sufuq.com/post/nginx-location%E5%92%8Crewrite%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99/</link>
+      <pubDate>Sun, 03 Sep 2017 18:14:40 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/nginx-location%E5%92%8Crewrite%E7%9A%84%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Mac上 Php Debug的坑</title>
