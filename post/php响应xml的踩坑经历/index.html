@@ -237,14 +237,14 @@ XML declration allowed only at the start of the document
 
 <p>但由于源站有些是响应<code>xml</code>， <code>php</code>响应<code>xml</code>的时候出错了。</p>
 
-<p><img src="media/15047052616523/15047088234563.jpg" alt="" /></p>
+<p><img src="/images/xml-error.jpg" alt="" /></p>
 
 <h2 id="问题跟踪及分析">问题跟踪及分析</h2>
 
 <p>首先习惯性一顿<code>google</code>， 确保代码实现没问题， 同时抓包查看响应。
 这两个都确认没问题， 对比代理请求与源站请求（使用<code>postman</code>）， 发现个奇怪问题， 代理请求的响应会多个空行。</p>
 
-<p><img src="media/15047052616523/15047093278468.jpg" alt="" /></p>
+<p><img src="/images/xml-chrome.jpg" alt="" /></p>
 
 <p>继续<code>google</code>， 找到对应的解决办法：</p>
 
