@@ -5,20 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>&amp;#X开头的是什么编码?</title>
+  <meta property="og:title" content="&amp;#X开头的是什么编码?" />
+  <meta name="twitter:title" content="&amp;#X开头的是什么编码?" />
+  <meta name="description" content="
+首先说明，这不是编码
+
+
+在使用readability的api提取网页内容的时候 点这里看-readability-网页内容提取利器 ，中文内容都是 &amp;#x 开头的一堆乱码似的东西。但保存成网页文件后，浏览器是可以正常显示的
+
+">
+  <meta property="og:description" content="
+首先说明，这不是编码
+
+
+在使用readability的api提取网页内容的时候 点这里看-readability-网页内容提取利器 ，中文内容都是 &amp;#x 开头的一堆乱码似的东西。但保存成网页文件后，浏览器是可以正常显示的
+
+">
+  <meta name="twitter:description" content="
+首先说明，这不是编码
+
+
+在使用readability的api提取网页内容的时候 点这里看-readability-网页内容提取利器 ，中文内容都是 &amp;#x 开头的一堆乱码似的东西。但保存成网页文件后，浏览器是可以正常显示的
+
+">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.26" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -163,11 +184,18 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="post-heading">
               
-                <h1>Tags</h1>
+                <h1>&amp;#X开头的是什么编码?</h1>
               
                 
+                
+                  <span class="post-meta">
+  发表于 2017-09-14
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -178,71 +206,122 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <blockquote>
+<p>首先说明，这不是编码</p>
+</blockquote>
+
+<p>在使用readability的api提取网页内容的时候 <a href="http://www.jianshu.com/p/b9cbb843e807">点这里看-readability-网页内容提取利器</a> ，中文内容都是 <code>&amp;#x</code> 开头的一堆乱码似的东西。但保存成网页文件后，浏览器是可以正常显示的</p>
+
+<p></p>
+
+<p>故搜索了一下，知乎上有个 <a href="https://www.zhihu.com/question/21390312/answer/18091465">回答</a> 挺好，在此转一下：</p>
+
+<p>形如</p>
+
+<pre><code>&amp;name;
+&amp;#dddd;
+&amp;#xhhhh;
+</code></pre>
+
+<p>的一串字符是 HTML、XML 等 SGML 类语言的转义序列（escape sequence）。 <strong>它们不是「编码」</strong> 。以 HTML 为例，这三种转义序列都称作 character reference：第一种是 character entity reference，后接预先定义的 entity 名称，而 entity 声明了自身指代的字符。</p>
+
+<p>后两种是 numeric character reference（NCR），数字取值为目标字符的 Unicode code point；以「&amp;#」开头的后接十进制数字，以「&amp;#x」开头的后接十六进制数字。</p>
+
+<p>从 HTML 4 开始，NCR 以 Unicode 为准，与文档编码无关。「中国」二字分别是 Unicode 字符 U+4E2D 和 U+56FD，十六进制表示的 code point 数值「4E2D」和「56FD」就是十进制的「20013」和「22269」。所以</p>
+
+<pre><code>我给加了空格，不然网页会自动渲染成文字...
+&amp;#x 4e2d;&amp;#x 56fd;
+&amp;# 20013;&amp;# 22269;
+</code></pre>
+
+<p>这两种 NCR 写法都会在显示时转换为「中国」二字。NCR 可以用于转义任何 Unicode 字符，而 character entity reference 很受限，参见 HTML 4 和 HTML5 中已有定义的字符列表：
+<a href="http://www.w3.org/TR/html401/sgml/entities.html">Character entity references in HTML 4</a>
+<a href="http://dev.w3.org/html5/html-author/charref">Character entity references in HTML5</a></p>
+
+<p>另外可以参考这篇文章 <a href="http://www.zhangxinxu.com/wordpress/?p=4562">使用&amp;#x 3000等空格实现最小成本中文对齐</a></p>
+
+<p>知道了是什么，现在来看怎么把它转回成中文呢？
+Python实现</p>
+
+<p>要将16进制字符转成中文可以用如下方法</p>
+
+<pre><code class="language-python"># Pythone3
+b'\u4e2d\u6587'.decode('unicode-escape') 
+# Python2
+'\u4e2d\u6587'.decode('unicode-escape')
+</code></pre>
+
+<p>故需要将 <code>&amp;#xhhhh;</code> 做替换，再用上面的方式进行转换。对于特殊符号（如加减乘除），会显示为 <code>&amp;#xhh</code> ，后面只有两位，在转换之前，需要提前补全。具体可参看 <a href="http://www.jianshu.com/p/b9cbb843e807">readability-网页内容提取利器</a></p>
+
+<p>Java实现</p>
+
+<pre><code class="language-java">//引用此处：http://xuelianbobo.iteye.com/blog/2155114 
+package com.xue.tools; 
+import java.io.BufferedWriter; 
+import java.io.FileWriter; 
+import java.io.IOException; 
+import java.net.MalformedURLException; 
+import java.net.URL; 
+import java.util.List; 
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern; 
+import org.dom4j.DocumentException; 
+import org.htmlcleaner.HtmlCleaner; 
+import org.htmlcleaner.TagNode; 
+import org.htmlcleaner.XPatherException; 
+
+public class Test { 
+    public static void main(String[] args) throws IOException, DocumentException, XPatherException { 
+        // 定义正则表达式来搜索中文字符的转义符号 
+        Pattern compile = Pattern.compile(&quot;&amp;#.*?;&quot;); 
+        // 测试用中文字符 
+        String sourceString = &quot;测试&amp;#x&quot;; 
+        Matcher matcher = compile.matcher(sourceString); 
+        // 循环搜索 并转换 替换 
+        while (matcher.find()) { 
+            String group = matcher.group(); 
+            // 获得16进制的码 
+            String hexcode = &quot;0&quot; + group.replaceAll(&quot;(&amp;\#|;)&quot;, &quot;&quot;); 
+            // 字符串形式的16进制码转成int并转成char 并替换到源串中 
+            sourceString = sourceString.replaceAll(group, (char) Integer.decode(hexcode).intValue() + &quot;&quot;); 
+        } 
+        System.out.println(sourceString); 
+    } 
+}
+</code></pre>
+
+<p>补充：
+后来想到，其实可以把这当成html来解析啊，然后就有了：</p>
+
+<pre><code>text = '&amp;#x 4e2d'
+lxml.html.fromstring(text).text
+</code></pre>
+
+<h2 id="参照">参照</h2>
+
+<p><a href="http://www.jianshu.com/p/6dcefb2a59b2">&amp;#x开头的是什么编码?</a></p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/php%E5%93%8D%E5%BA%94xml%E7%9A%84%E8%B8%A9%E5%9D%91%E7%BB%8F%E5%8E%86/" data-toggle="tooltip" data-placement="top" title="Php响应xml的踩坑经历">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/php" class="list-group-item">
-          php<span class="badge">5</span></a>
-      
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">5</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">3</span></a>
-      
-      <a href="/tags/nginx" class="list-group-item">
-          nginx<span class="badge">2</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/ansible" class="list-group-item">
-          ansible<span class="badge">1</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/dns" class="list-group-item">
-          dns<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/scrapy" class="list-group-item">
-          scrapy<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/unicode" class="list-group-item">
-          unicode<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      <a href="/tags/xdebug" class="list-group-item">
-          xdebug<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://sufuq.com/post/#x%E5%BC%80%E5%A4%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E7%BC%96%E7%A0%81/</loc>
+    <lastmod>2017-09-14T11:28:13+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sufuq.com/post/php%E5%93%8D%E5%BA%94xml%E7%9A%84%E8%B8%A9%E5%9D%91%E7%BB%8F%E5%8E%86/</loc>
     <lastmod>2017-09-06T22:58:37+08:00</lastmod>
   </url>
@@ -154,7 +159,7 @@
   
   <url>
     <loc>http://sufuq.com/</loc>
-    <lastmod>2017-09-06T22:58:37+08:00</lastmod>
+    <lastmod>2017-09-14T11:28:13+08:00</lastmod>
   </url>
   
   <url>
@@ -239,7 +244,7 @@
   
   <url>
     <loc>http://sufuq.com/post/</loc>
-    <lastmod>2017-09-06T22:58:37+08:00</lastmod>
+    <lastmod>2017-09-14T11:28:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -276,6 +281,12 @@
   <url>
     <loc>http://sufuq.com/tags/</loc>
     <lastmod>2017-08-09T17:12:59+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://sufuq.com/tags/unicode/</loc>
+    <lastmod>2017-09-14T11:28:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
