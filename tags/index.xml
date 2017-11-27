@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>Javascript</title>
+      <link>http://sufuq.com/tags/javascript/</link>
+      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Linux</title>
       <link>http://sufuq.com/tags/linux/</link>
       <pubDate>Mon, 21 Aug 2017 14:47:51 +0800</pubDate>
@@ -157,11 +166,29 @@
     </item>
     
     <item>
+      <title>Sinon</title>
+      <link>http://sufuq.com/tags/sinon/</link>
+      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/sinon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Unicode</title>
       <link>http://sufuq.com/tags/unicode/</link>
       <pubDate>Thu, 14 Sep 2017 11:28:13 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/tags/unicode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unit Test</title>
+      <link>http://sufuq.com/tags/unit-test/</link>
+      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/unit-test/</guid>
       <description></description>
     </item>
     

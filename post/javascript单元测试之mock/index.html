@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Javascript单元测试之mock</title>
+  <meta property="og:title" content="Javascript单元测试之mock" />
+  <meta name="twitter:title" content="Javascript单元测试之mock" />
+  <meta name="description" content="在真实的项目中，各种各样的功能会使代码很难被测试。不论是浏览器中的Ajax请求，定时器，日期时间等功能，还是Node.js中的数据库，网络，文件操作。
+
+这些功能之所以很难被测试是因为你不能在代码中控制它们。如果你使用了Ajax，为了让你的代码通过测试，你需要有一个服务器来响应请求。如果你使用了setTimeout，你的测试代码将不得不等待定时器被触发。如果你访问了数据库或是网络，也是同样的道理，你需要一个含有正确数据的数据库或是一个网络服务器。
+
+通过使用Sinon，我们可以让测试复杂代码变得不复杂。
+
+">
+  <meta property="og:description" content="在真实的项目中，各种各样的功能会使代码很难被测试。不论是浏览器中的Ajax请求，定时器，日期时间等功能，还是Node.js中的数据库，网络，文件操作。
+
+这些功能之所以很难被测试是因为你不能在代码中控制它们。如果你使用了Ajax，为了让你的代码通过测试，你需要有一个服务器来响应请求。如果你使用了setTimeout，你的测试代码将不得不等待定时器被触发。如果你访问了数据库或是网络，也是同样的道理，你需要一个含有正确数据的数据库或是一个网络服务器。
+
+通过使用Sinon，我们可以让测试复杂代码变得不复杂。
+
+">
+  <meta name="twitter:description" content="在真实的项目中，各种各样的功能会使代码很难被测试。不论是浏览器中的Ajax请求，定时器，日期时间等功能，还是Node.js中的数据库，网络，文件操作。
+
+这些功能之所以很难被测试是因为你不能在代码中控制它们。如果你使用了Ajax，为了让你的代码通过测试，你需要有一个服务器来响应请求。如果你使用了setTimeout，你的测试代码将不得不等待定时器被触发。如果你访问了数据库或是网络，也是同样的道理， …">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/javascript%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8Bmock/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.26" />
+  <link rel="canonical" href="http://sufuq.com/post/javascript%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8Bmock/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Books" href="/page/books/">Books</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Javascript单元测试之mock</h1>
+              
+                
+                
+                  <span class="post-meta">
+  发表于 2017-11-27
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>在真实的项目中，各种各样的功能会使代码很难被测试。不论是浏览器中的Ajax请求，定时器，日期时间等功能，还是Node.js中的数据库，网络，文件操作。</p>
+
+<p>这些功能之所以很难被测试是因为你不能在代码中控制它们。如果你使用了Ajax，为了让你的代码通过测试，你需要有一个服务器来响应请求。如果你使用了setTimeout，你的测试代码将不得不等待定时器被触发。如果你访问了数据库或是网络，也是同样的道理，你需要一个含有正确数据的数据库或是一个网络服务器。</p>
+
+<p>通过使用Sinon，我们可以让测试复杂代码变得不复杂。</p>
+
+<p></p>
+
+<h2 id="安装">安装</h2>
+
+<pre><code>npm install sinon
+var sinon = require('sinon');
+</code></pre>
+
+<h2 id="常规说明">常规说明</h2>
+
+<ul>
+<li><code>Spy</code>: 它提供有关函数调用的信息，而不影响它们的行为</li>
+<li><code>Stub</code>: 像<code>Spy</code>，但完全取代了函数功能。这使得可以做任何你喜欢的stubbed函数 - 抛出一个异常，返回一个特定的值，等等</li>
+<li><code>Mock</code>: 通过结合<code>Spy</code>和<code>Stub</code>来更换整个对象</li>
+<li><code>Fake timers</code>: 可以用来穿越时间，例如触发<code>setTimeout</code></li>
+<li><code>Fake XMLHttpRequest and Server</code>: 可以用来伪造<code>Ajax</code>请求和响应</li>
+</ul>
+
+<h2 id="spy使用">Spy使用</h2>
+
+<ul>
+<li>收集函数的调用信息</li>
+<li>原始函数会运行</li>
+<li>适合验证函数是否被调用， 调用了几次等</li>
+</ul>
+
+<pre><code class="language-javascript">var sinon = require('sinon');
+var spy = sinon.spy();
+
+//We can call a spy like a function
+spy('Hello', 'World');
+
+//Now we can get information about the call
+console.log(spy.firstCall.args); 
+
+//output: 
+//['Hello', 'World']
+</code></pre>
+
+<pre><code class="language-javascript">var sinon = require('sinon');
+
+var User = {
+    setName: function (name) {
+        this.name = name;
+    }
+};
+
+//Create a spy for the setName function
+var setNameSpy = sinon.spy(User, 'setName');
+
+//Now, any time we call the function, the spy logs information about it
+User.setName('ABD');
+
+//Which we can see by looking at the spy object
+console.log(setNameSpy.callCount);
+
+//Important final step - remove the spy
+setNameSpy.restore();
+
+//output: setName被调用一次
+//1 
+</code></pre>
+
+<pre><code class="language-javascript">//使用mocha框架测试
+var sinon = require('sinon');
+var assert = require('assert');
+
+function myFucntion(condition, callback) {
+    if(condition)
+        callback();
+}
+
+describe('myFunction', function () {
+    it('should call the callback function', function () {
+        var callback = sinon.spy();
+        myFucntion(true, callback);
+
+        assert(callback.calledOnce);
+    })
+});
+
+//output
+//  myFunction
+//    ✓ should call the callback function
+//
+//  1 passing (7ms)
+
+</code></pre>
+
+<h2 id="stub使用">Stub使用</h2>
+
+<ul>
+<li>拥有<code>Spy</code>所有功能</li>
+<li>原始函数不会运行， 直接替换</li>
+</ul>
+
+<p>适合场景：</p>
+
+<ul>
+<li>替换测试变慢或者难以测试的外部调用</li>
+<li>根据函数返回值来触发不同的操作</li>
+<li>测试异常情况， 如抛出异常等</li>
+</ul>
+
+<pre><code class="language-javascript">var sinon = require('sinon');
+var stub = sinon.stub();
+
+stub('hello');
+
+console.log(stub.firstCall.args);
+
+//output
+//['hello']
+</code></pre>
+
+<pre><code class="language-javascript">var sinon = require('sinon');
+const jsdom = require(&quot;jsdom&quot;);
+const { JSDOM } = jsdom;
+var $ = require('jquery')((new JSDOM(``, { runScripts: &quot;outside-only&quot; })).window);
+
+function saveUser(user, callback) {
+    $.post('/user', {
+        first: user.first,
+        last: user.last
+    }, callback);
+}
+
+describe('saveUser', function () {
+    it('should call callback after saving', function () {
+        var post = sinon.stub($, 'post');
+
+        var expectedUrl = '/user';
+        var expectedParams = {
+            first: 'firstname',
+            last: 'lastname'
+        };
+
+        var user = {
+            first: 'firstname',
+            last: 'lastname'
+        };
+
+        var callback = sinon.spy();
+
+        saveUser(user, callback);
+
+        post.restore();
+        sinon.assert.calledWith(post, expectedUrl, expectedParams);
+    })
+});
+
+//output
+//  saveUser
+//    ✓ should call callback after saving
+//
+//
+//  1 passing (11ms)
+
+</code></pre>
+
+<h2 id="mock使用">mock使用</h2>
+
+<p><code>Mocks</code>是使用<code>stub</code>的另一种途径。如果你曾经听过&rdquo;mock对象&rsquo;这种说法，这其实是一码事 &mdash;- <code>Sinon</code>的<code>mock</code>可以用来替换整个对象以改变其行为，就像函数<code>stub</code>一样。</p>
+
+<p>基本上只有需要针对一个对象的多个方法进行stub时才需要使用<code>mock</code>。如果只需要替换一个方法，使用<code>stub</code>更简单。</p>
+
+<p>使用<code>mock</code>时你要很小心。由于<code>mock</code>强大的功能，它很容易导致你的测试过于具体 &mdash;- 测试了太多，太细节的内容 &mdash;- 这很容易在不经意间导致你的测试变得脆弱</p>
+
+<p>与<code>spy</code>和<code>stub</code>不同的是，<code>mock</code>有内置的断言。你需要预先定义好<code>mock</code>对象期望的行为并在测试结束前执行验证函数。</p>
+
+<pre><code class="language-javascript">var sinon = require('sinon');
+var store = require('store');
+
+function incrementStoredData(value, amount){
+    var total = store.get(value) || 0;
+    var newtotal = total + amount;
+    store.set(value, newtotal);
+}
+
+describe('incrementStoredData', function() {
+    it('should increment stored value by one', function() {
+        var storeMock = sinon.mock(store);
+        storeMock.expects('get').withArgs('data').returns(0);
+        storeMock.expects('set').once().withArgs('data', 1);
+
+        incrementStoredData('data', 1);
+
+        storeMock.restore();
+        storeMock.verify();
+    });
+});
+
+//output
+//  incrementStoredData
+//    ✓ should increment stored value by one
+//
+//
+//  1 passing (12ms)
+</code></pre>
+
+<h2 id="最佳实践-使用sinon-test">最佳实践： 使用sinon.test()</h2>
+
+<p>在前面的示例中，我们使用了<code>stub.restore()</code>或<code>mock.restore()</code>来执行清理操作。这个操作是必要的，否则测试替身会一直存在并给其它测试带来负面影响或是导致错误。</p>
+
+<p>但是直接使用<code>restore()</code>方法是有问题的。因为有可能在<code>restore()</code>执行之前测试代码就因为错误提前结束执行了。</p>
+
+<p>有两种方法可以解决这个问题：我们可以把所有的代码放在一个<code>try catch</code>块中，这样就可以在<code>finally</code>块中执行<code>restore()</code>而不用担心测试代码是否报错。</p>
+
+<p>还有一种更好的方式，就是把测试代码包裹在<code>sinon.test()</code>中：</p>
+
+<pre><code class="language-javascript">it('should do something with stubs', sinon.test(function() {
+    
+    //注意： 使用this而非sinon
+    var stub = this.stub($, 'post');
+
+    doSomething();
+
+    sinon.assert.calledOnce(stub);
+    
+    //没有stub.restore()处理了
+});
+</code></pre>
+
+<p>把测试代码包裹在<code>sinon.test()</code>之中后，我们就可以使用<code>Sinon的沙盒特性</code>了。它允许我们通过<code>this.spy()</code>、<code>this.stub()</code>和<code>this.mock()</code>来创建<code>spy</code>，<code>stub</code>和<code>mock</code>。任何使用沙盒特性创建的测试替身都会被自动清理。</p>
+
+<p>注意上边的例子中没有<code>stub.restore()</code>操作，因为在沙盒特性下的测试里它变得不必要了。</p>
+
+<p>如果在所有地方都使用了<code>sinon.test()</code>，那么你就可以避免由于某个测试未能清理它内部的测试替身而导致后续测试随机失败的情况。</p>
+
+<h2 id="sinon工作原理浅析">Sinon工作原理浅析</h2>
+
+<p>为了更好的理解Sinon的工作原理，让我们看一些和它工作原理有关的例子。这将有利于我们更好的理解Sinon究竟做了哪些工作并在不同的场景中更好的利用它。</p>
+
+<h4 id="spy本质上是一个函数包装器">spy本质上是一个函数包装器</h4>
+
+<pre><code class="language-javascript">function createSpy(targetFunc) {
+    const spy = function () {
+        spy.args = arguments;
+        spy.returnValue = targetFunc.apply(this, arguments);
+        return spy.returnValue;
+    };
+
+    return spy;
+}
+
+function sum(a, b) {
+    return a + b;
+}
+
+const spiedSum = createSpy(sum);
+
+spiedSum(10, 5, 1);
+
+console.log(spiedSum.args);
+console.log(spiedSum.returnValue);
+
+// output 
+// { '0': 10, '1': 5, '2': 1 }
+// 15
+</code></pre>
+
+<h4 id="stub是把一个函数替换成另一个">stub是把一个函数替换成另一个</h4>
+
+<pre><code class="language-javascript">var stub = function() { };
+
+var original = thing.otherFunction;
+thing.otherFunction = stub;
+
+// 现在开始，所有对thing.otherFunction的调用都会被stub的调用所取代
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/%E5%BC%80%E5%A4%B4%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E7%BC%96%E7%A0%81/" data-toggle="tooltip" data-placement="top" title="&amp;#X开头的是什么编码?">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.26</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+

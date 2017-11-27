@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/javascript/</link>
+    <description>Recent content in Javascript on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Mon, 27 Nov 2017 21:56:18 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Javascript单元测试之mock</title>
+      <link>http://sufuq.com/post/javascript%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8Bmock/</link>
+      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/javascript%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8Bmock/</guid>
+      <description>&lt;p&gt;在真实的项目中，各种各样的功能会使代码很难被测试。不论是浏览器中的Ajax请求，定时器，日期时间等功能，还是Node.js中的数据库，网络，文件操作。&lt;/p&gt;
+
+&lt;p&gt;这些功能之所以很难被测试是因为你不能在代码中控制它们。如果你使用了Ajax，为了让你的代码通过测试，你需要有一个服务器来响应请求。如果你使用了setTimeout，你的测试代码将不得不等待定时器被触发。如果你访问了数据库或是网络，也是同样的道理，你需要一个含有正确数据的数据库或是一个网络服务器。&lt;/p&gt;
+
+&lt;p&gt;通过使用Sinon，我们可以让测试复杂代码变得不复杂。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
