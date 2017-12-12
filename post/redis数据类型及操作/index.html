@@ -5,20 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Tags</title>
-  <meta property="og:title" content="Tags" />
-  <meta name="twitter:title" content="Tags" />
+  <title>Redis数据类型及操作</title>
+  <meta property="og:title" content="Redis数据类型及操作" />
+  <meta name="twitter:title" content="Redis数据类型及操作" />
+  <meta name="description" content="">
+  <meta property="og:description" content="">
+  <meta name="twitter:description" content="">
   <meta name="author" content="苏示水"/>
   <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="http://sufuq.com/tags/" />
+  <meta property="og:url" content="http://sufuq.com/post/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%93%8D%E4%BD%9C/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="示水的程序客栈" />
 
   <meta name="generator" content="Hugo 0.26" />
-  <link rel="canonical" href="http://sufuq.com/tags/" />
+  <link rel="canonical" href="http://sufuq.com/post/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%93%8D%E4%BD%9C/" />
   <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -163,11 +166,18 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="post-heading">
               
-                <h1>Tags</h1>
+                <h1>Redis数据类型及操作</h1>
               
                 
+                
+                  <span class="post-meta">
+  发表于 2017-12-12
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -178,83 +188,260 @@
 
 
     
-  
-  <div class="container" role="main">
-    <article class="post-preview">
-      <div class="list-group col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p></p>
+
+<blockquote>
+<ul>
+<li>string</li>
+<li>hashes</li>
+<li>lists</li>
+<li>sets</li>
+<li>sorted sets</li>
+<li>Bitmaps</li>
+<li>HyperLogLogs</li>
+</ul>
+</blockquote>
+
+<h2 id="strings类型及操作">strings类型及操作</h2>
+
+<p><code>string</code>是最简单的类型，是二进制安全的。意思是<code>redis</code>的<code>string</code>可以包含任何数据，比如 <code>jpg</code> 图片或者序列化的对象。从内部实现来看其实 <code>string</code> 可以看作 <code>byte</code> 数组，最大上限是 <code>1G</code> 字节</p>
+
+<pre><code class="language-c">//string类型定义
+struct sdshdr {
+    long len;
+    long free;
+    char buf[];
+};
+</code></pre>
+
+<pre><code>
+// 相关操作： set get setnx setex setrange mset msetnx get getrange 
+// mget incr incrby decr decrby append strlen 等
+
+127.0.0.1:6379&gt; set key1 value1
+OK
+127.0.0.1:6379&gt; get key1
+&quot;value1&quot;
+127.0.0.1:6379&gt; setnx key2 value2
+(integer) 1
+127.0.0.1:6379&gt; get key2
+&quot;value2&quot;
+</code></pre>
+
+<h2 id="hashes类型及操作">hashes类型及操作</h2>
+
+<p><code>Redis hash</code>是一个<code>string</code>类型的<code>field</code>和<code>value</code>的映射表.它的添加、删除操作都是<code>O(1)</code>(平均)。<strong><code>hash</code> 特别适合用于存储对象</strong>。相较于将对象的每个字段存成单个 <code>string</code> 类型。将一个对象存储在 <code>hash</code> 类型中会占用更少的内存，并且可以更方便的存取整个对象。省内存的原因是新建一个 <code>hash</code> 对象时开始是用 <code>zipmap</code>(又称为 <code>small hash</code>)来存储的</p>
+
+<pre><code>
+// 相关操作：hset hsetnx hmset hincrby hexists hlen hdel hkeys hvals hgetall
+
+127.0.0.1:6379&gt; hset myhash field1 value1
+(integer) 1
+127.0.0.1:6379&gt; hset myhash field2 value2
+(integer) 1
+127.0.0.1:6379&gt; hget myhash field1
+&quot;value1&quot;
+127.0.0.1:6379&gt; hget myhash field2
+&quot;value2&quot;
+</code></pre>
+
+<h2 id="lists类型及操作">lists类型及操作</h2>
+
+<p><code>list</code> 是一个每个子元素都是 <code>string</code> 类型的双向链表，链表的最大长度是<code>(2 的 32 次方)</code>，主要功能是 <code>push</code>、<code>pop</code>、获取一个范围的所有值等等，操作中 <code>key</code> 理解为链表的名字。</p>
+
+<pre><code>//相关操作： lpush rpush linsert lset lset lrem ltrim lpop rpop rpoplpush lindex llen
+
+127.0.0.1:6379&gt; lpush mylist value1
+(integer) 1
+127.0.0.1:6379&gt; lpush mylist value2
+(integer) 2
+127.0.0.1:6379&gt; lrange mylist 0 -1
+1) &quot;value2&quot;
+2) &quot;value1&quot;
+127.0.0.1:6379&gt; rpush mylist2 value1
+(integer) 1
+127.0.0.1:6379&gt; rpush mylist2 value2
+(integer) 2
+127.0.0.1:6379&gt; lrange mylist2 0 -1
+1) &quot;value1&quot;
+2) &quot;value2&quot;
+</code></pre>
+
+<h2 id="sets类型及操作">sets类型及操作</h2>
+
+<p><code>set</code> 是 <code>string</code> 类型的无序集合，对集合的操作有添加删除元素，有对多个集合
+求交并差等操作，操作中 <code>key</code> 理解为集合的名字。</p>
+
+<p><code>set</code> 的是通过 <code>hash table</code> 实现的，所以添加、删除和查找的复杂度都是 <code>O(1)</code></p>
+
+<pre><code>// 相关操作： sadd smembers srem spop sdiff sdiffstore sinter sinterstore
+// sunion sunionstore smove scard sismember srandmember
+
+127.0.0.1:6379&gt; sadd myset 'hello'
+(integer) 1
+127.0.0.1:6379&gt; sadd myset 'world'
+(integer) 1
+127.0.0.1:6379&gt; sadd myset 'world'
+(integer) 0
+127.0.0.1:6379&gt; smembers myset
+1) &quot;hello&quot;
+2) &quot;world&quot;
+</code></pre>
+
+<h2 id="sorted-sets-类型及操作">sorted sets 类型及操作</h2>
+
+<p>在 <code>set</code> 的基础上增加了一个顺序属性，这一属性在添加修改元素的时候可以指定，每次指定后，<code>zset</code> 会自动重新按新的值调整顺序</p>
+
+<pre><code>// 相关操作：zadd zrange zrem zincrby zrank zrevrank zrevrange zrangebyscore zcount zcard zscore zremrangebyrank zremrangebyscore
+
+127.0.0.1:6379&gt; zadd myzset 1 'one'
+(integer) 1
+127.0.0.1:6379&gt; zadd myzset 3 'three'
+(integer) 1
+127.0.0.1:6379&gt; zrange myzset 0 -1
+1) &quot;one&quot;
+2) &quot;three&quot;
+127.0.0.1:6379&gt; zadd myzset 2 'three'
+(integer) 0
+127.0.0.1:6379&gt; zrange myzset 0 -1
+1) &quot;one&quot;
+2) &quot;three&quot;
+127.0.0.1:6379&gt; zrange myzset 0 -1 withscores
+1) &quot;one&quot;
+2) &quot;1&quot;
+3) &quot;three&quot;
+4) &quot;2&quot;
+</code></pre>
+
+<h2 id="redis-常用命令">redis 常用命令</h2>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>keys</td>
+<td>返回满足给定 <code>pattern</code> 的所有 <code>key</code></td>
+</tr>
+
+<tr>
+<td>exists</td>
+<td>确认一个 <code>key</code> 是否存在</td>
+</tr>
+
+<tr>
+<td>del</td>
+<td>删除一个<code>key</code></td>
+</tr>
+
+<tr>
+<td>expire</td>
+<td>设置过期时间（单位： 秒）</td>
+</tr>
+
+<tr>
+<td>ttl</td>
+<td>查看一个<code>key</code>的剩余过期时间</td>
+</tr>
+
+<tr>
+<td>move</td>
+<td>将当前数据库中的<code>key</code>转移到其它数据库中</td>
+</tr>
+
+<tr>
+<td>persist</td>
+<td>移除给定 <code>key</code> 的过期时间</td>
+</tr>
+
+<tr>
+<td>randomkey</td>
+<td>随机返回一个 <code>key</code></td>
+</tr>
+
+<tr>
+<td>rename</td>
+<td>重命名<code>key</code></td>
+</tr>
+
+<tr>
+<td>type</td>
+<td>返回值的类型</td>
+</tr>
+
+<tr>
+<td>ping</td>
+<td>测试连接</td>
+</tr>
+
+<tr>
+<td>echo</td>
+<td>打印</td>
+</tr>
+
+<tr>
+<td>select</td>
+<td>选择数据库，<code>Redis</code> 数据库编号从 <code>0~15</code></td>
+</tr>
+
+<tr>
+<td>dbsize</td>
+<td>返回当前数据库的key数目</td>
+</tr>
+
+<tr>
+<td>info</td>
+<td>服务器的信息和统计</td>
+</tr>
+
+<tr>
+<td>monitor</td>
+<td>实时转储收到的请求</td>
+</tr>
+
+<tr>
+<td>config get</td>
+<td>获取服务器配置信息</td>
+</tr>
+
+<tr>
+<td>flushdb</td>
+<td>清空当前数据库所有key</td>
+</tr>
+
+<tr>
+<td>flushall</td>
+<td>清空所有数据库的key</td>
+</tr>
+</tbody>
+</table>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/javascript%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B9%8Bmock/" data-toggle="tooltip" data-placement="top" title="Javascript单元测试之mock">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
       
-      <a href="/tags/java" class="list-group-item">
-          java<span class="badge">5</span></a>
+        
       
-      <a href="/tags/php" class="list-group-item">
-          php<span class="badge">5</span></a>
-      
-      <a href="/tags/python" class="list-group-item">
-          python<span class="badge">5</span></a>
-      
-      <a href="/tags/linux" class="list-group-item">
-          linux<span class="badge">3</span></a>
-      
-      <a href="/tags/nginx" class="list-group-item">
-          nginx<span class="badge">2</span></a>
-      
-      <a href="/tags/other" class="list-group-item">
-          other<span class="badge">2</span></a>
-      
-      <a href="/tags/shell" class="list-group-item">
-          shell<span class="badge">2</span></a>
-      
-      <a href="/tags/ansible" class="list-group-item">
-          ansible<span class="badge">1</span></a>
-      
-      <a href="/tags/crawler" class="list-group-item">
-          crawler<span class="badge">1</span></a>
-      
-      <a href="/tags/dns" class="list-group-item">
-          dns<span class="badge">1</span></a>
-      
-      <a href="/tags/ffmpeg" class="list-group-item">
-          ffmpeg<span class="badge">1</span></a>
-      
-      <a href="/tags/git" class="list-group-item">
-          git<span class="badge">1</span></a>
-      
-      <a href="/tags/imagemagick" class="list-group-item">
-          imagemagick<span class="badge">1</span></a>
-      
-      <a href="/tags/javascript" class="list-group-item">
-          javascript<span class="badge">1</span></a>
-      
-      <a href="/tags/redis" class="list-group-item">
-          redis<span class="badge">1</span></a>
-      
-      <a href="/tags/scrapy" class="list-group-item">
-          scrapy<span class="badge">1</span></a>
-      
-      <a href="/tags/seo" class="list-group-item">
-          seo<span class="badge">1</span></a>
-      
-      <a href="/tags/shadowsocks" class="list-group-item">
-          shadowsocks<span class="badge">1</span></a>
-      
-      <a href="/tags/sinon" class="list-group-item">
-          sinon<span class="badge">1</span></a>
-      
-      <a href="/tags/unicode" class="list-group-item">
-          unicode<span class="badge">1</span></a>
-      
-      <a href="/tags/unit-test" class="list-group-item">
-          unit-test<span class="badge">1</span></a>
-      
-      <a href="/tags/unittest" class="list-group-item">
-          unittest<span class="badge">1</span></a>
-      
-      <a href="/tags/xdebug" class="list-group-item">
-          xdebug<span class="badge">1</span></a>
-      
-      </div>
-    </article>
+
+    </div>
   </div>
+</div>
 
     <footer>
   <div class="container">

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on 示水的程序客栈</title>
+    <link>http://sufuq.com/tags/redis/</link>
+    <description>Recent content in Redis on 示水的程序客栈</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
+    <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
+    <lastBuildDate>Tue, 12 Dec 2017 15:29:12 +0800</lastBuildDate>
+    
+	<atom:link href="http://sufuq.com/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Redis数据类型及操作</title>
+      <link>http://sufuq.com/post/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Tue, 12 Dec 2017 15:29:12 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
