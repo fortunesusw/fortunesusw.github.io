@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>fortunesusw@gmail.com (苏示水)</managingEditor>
     <webMaster>fortunesusw@gmail.com (苏示水)</webMaster>
-    <lastBuildDate>Tue, 12 Dec 2017 15:29:12 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Dec 2017 12:31:53 +0800</lastBuildDate>
     
 	<atom:link href="http://sufuq.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Javascript 使用jest单元测试</title>
+      <link>http://sufuq.com/post/javascript-%E4%BD%BF%E7%94%A8jest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Wed, 13 Dec 2017 12:31:53 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/post/javascript-%E4%BD%BF%E7%94%A8jest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://facebook.github.io/jest/docs/en/getting-started.html&#34;&gt;官方文档&lt;/a&gt;， 文档很详细， 内容也比较丰富&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;jest&lt;/code&gt;是&lt;code&gt;facebook&lt;/code&gt;出品，是一个完整的&lt;code&gt;js&lt;/code&gt;单元测试框架，有比较完善的测试方案，也可以配合其他断言库、 &lt;code&gt;mock&lt;/code&gt;库等&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Redis数据类型及操作</title>

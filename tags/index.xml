@@ -78,9 +78,18 @@
     <item>
       <title>Javascript</title>
       <link>http://sufuq.com/tags/javascript/</link>
-      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <pubDate>Wed, 13 Dec 2017 12:31:53 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jest</title>
+      <link>http://sufuq.com/tags/jest/</link>
+      <pubDate>Wed, 13 Dec 2017 12:31:53 +0800</pubDate>
+      <author>fortunesusw@gmail.com (苏示水)</author>
+      <guid>http://sufuq.com/tags/jest/</guid>
       <description></description>
     </item>
     
@@ -195,7 +204,7 @@
     <item>
       <title>Unit Test</title>
       <link>http://sufuq.com/tags/unit-test/</link>
-      <pubDate>Mon, 27 Nov 2017 21:56:18 +0800</pubDate>
+      <pubDate>Wed, 13 Dec 2017 12:31:53 +0800</pubDate>
       <author>fortunesusw@gmail.com (苏示水)</author>
       <guid>http://sufuq.com/tags/unit-test/</guid>
       <description></description>
