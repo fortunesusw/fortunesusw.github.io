@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>麻将快速高效判胡算法</title>
+  <meta property="og:title" content="麻将快速高效判胡算法" />
+  <meta name="twitter:title" content="麻将快速高效判胡算法" />
+  <meta name="description" content="近段时候在搞麻将， 碰到听牌，胡牌的算法， 这边记录下一个高效方式。
+
+改进查表法原文地址， 2008年，由一个日本人来搞出来的
+
+压测100万次效果：
+14 张: 484.932ms
+11 张: 439.485ms
+8 张: 377.300ms
+5 张: 370.023ms
+
+
+">
+  <meta property="og:description" content="近段时候在搞麻将， 碰到听牌，胡牌的算法， 这边记录下一个高效方式。
+
+改进查表法原文地址， 2008年，由一个日本人来搞出来的
+
+压测100万次效果：
+14 张: 484.932ms
+11 张: 439.485ms
+8 张: 377.300ms
+5 张: 370.023ms
+
+
+">
+  <meta name="twitter:description" content="近段时候在搞麻将， 碰到听牌，胡牌的算法， 这边记录下一个高效方式。
+
+改进查表法原文地址， 2008年，由一个日本人来搞出来的
+
+压测100万次效果：
+14 张: 484.932ms
+11 张: 439.485ms
+8 张: 377.300ms
+5 张: 370.023ms
+
+
+">
+  <meta name="author" content="苏示水"/>
+  <link href='http://sufuq.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:image" content="http://sufuq.com/img/avatar-icon.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="http://sufuq.com/post/%E9%BA%BB%E5%B0%86%E5%BF%AB%E9%80%9F%E9%AB%98%E6%95%88%E5%88%A4%E8%83%A1%E7%AE%97%E6%B3%95/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="示水的程序客栈" />
+
+  <meta name="generator" content="Hugo 0.26" />
+  <link rel="canonical" href="http://sufuq.com/post/%E9%BA%BB%E5%B0%86%E5%BF%AB%E9%80%9F%E9%AB%98%E6%95%88%E5%88%A4%E8%83%A1%E7%AE%97%E6%B3%95/" />
+  <link rel="alternate" href="http://sufuq.com/index.xml" type="application/rss+xml" title="示水的程序客栈">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://sufuq.com/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="http://sufuq.com/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="http://sufuq.com/css/highlight.min.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://sufuq.com">示水的程序客栈</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Books" href="/page/books/">Books</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="示水的程序客栈" href="http://sufuq.com">
+            <img class="avatar-img" src="http://sufuq.com/img/avatar-icon.jpg" alt="示水的程序客栈" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>麻将快速高效判胡算法</h1>
+              
+                
+                
+                  <span class="post-meta">
+  发表于 2018-01-06
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>近段时候在搞麻将， 碰到听牌，胡牌的算法， 这边记录下一个高效方式。</p>
+
+<p><a href="http://hp.vector.co.jp/authors/VA046927/mjscore/mjalgorism.html">改进查表法原文地址</a>， 2008年，由一个日本人来搞出来的</p>
+
+<pre><code>压测100万次效果：
+14 张: 484.932ms
+11 张: 439.485ms
+8 张: 377.300ms
+5 张: 370.023ms
+</code></pre>
+
+<p></p>
+
+<h2 id="算法概述">算法概述</h2>
+
+<p>改进的查表法是给每种牌编一个id， 麻将中共34种牌（筒、条、万、东南西北中发白）。 然后给手牌排序， 不管具体牌面， 只计算连续的张数，不连续用0间隔开， 得到一个「牌型」， 再做特定二进制转换，后从表中查牌型是否存在。</p>
+
+<p>例如：</p>
+
+<pre><code>「１２３」→「１１１」
+「５６７」→「１１１」
+「１１１」→「３」
+「３３３」→「３」
+「２３４４５６」→「１１２１１」
+
+「１２３５６７一二三五六七西西」→「１１１０１１１０１１１０１１１０２」
+
+「１１１２３４６７８東東東西西」→「３１１１０１１１０３０２」
+
+「１１１２２２２３３３３４４４」→「３４４３」
+</code></pre>
+
+<p>特定二进制转换：</p>
+
+<pre><code>「１」 →「０」
+「２」 →「１１０」
+「３」 →「１１１１０」
+「４」 →「１１１１１１０」
+「１０」→「１０」
+「２０」→「１１１０」
+「３０」→「１１１１１０」
+「４０」→「１１１１１１１０」
+</code></pre>
+
+<h2 id="算法实现">算法实现</h2>
+
+<h3 id="生成胡牌表">生成胡牌表</h3>
+
+<p>直接帖原作者的代码， 到现在还看不太懂， 不完全排列组合， 生成的组合均是胡牌的牌型， 不胡的牌型未生成（原作者真厉害）， 生成后只有不到一万种牌型。</p>
+
+<pre><code class="language-ruby">#! /usr/bin/ruby
+
+# 順列生成
+class Array
+  def perms
+    return [[]] if empty?
+    uniq.inject([]) do |rs, h|
+      tmp = self.dup
+      tmp.delete_at(index(h))
+      rs + tmp.perms.map {|t| [h] + t }
+    end
+  end
+  def total
+    self.inject(0){|t,a| t += a}
+  end
+end
+
+# a : [[1,1,1], [1,1,1], [1,1,1], [1,1,1], [2]]
+def ptn(a)
+  if a.size == 1 then
+    return [a]
+  end
+  ret = Array.new
+  # 重ならないパターン
+  ret += a.perms
+  # 重なるパターン
+  h1 = Hash.new
+  for i in 0..a.size-1
+    for j in i+1..a.size-1
+      key = [a[i], 0, a[j]].to_s
+      if !h1.key?(key) then
+        h1.store(key, nil)
+        h2 = Hash.new
+        # a[i]とa[j]を範囲をずらしながら重ねる
+        for k in 0..a[i].size+a[j].size
+          t = [0]*a[j].size + a[i] + [0]*a[j].size
+          for m in 0..a[j].size-1
+            t[k+m] += a[j][m]
+          end
+          # 余分な0を取り除く
+          t.delete(0)
+          # 4より大きい値がないかチェック
+          next if t.any? {|v| v &gt; 4}
+          # 9より長くないかチェック
+          next if t.size &gt;9
+          # 重複チェック
+          if !h2.key?(t.to_s) then
+            h2.store(t.to_s, nil)
+            # 残り
+            t2 = a.dup
+            t2.delete_at(i)
+            t2.delete_at(j-1)
+            # 再帰呼び出し
+            ret += ptn([t]+t2)
+          end
+        end
+      end
+    end
+  end
+  return ret
+end
+
+# キー値を計算
+def calc_key(a)
+  ret = 0
+  len = -1
+  for b in a
+    for i in b
+      len += 1
+      case i
+      when 2 then
+        ret |= 0b11 &lt;&lt; len
+        len += 2
+      when 3 then
+        ret |= 0b1111 &lt;&lt; len
+        len += 4
+      when 4 then
+        ret |= 0b111111 &lt;&lt; len
+        len += 6
+      end
+    end
+    ret |= 0b1 &lt;&lt; len
+    len += 1
+  end
+  return ret
+end
+
+# a : [[1,1,1], [1,1,1], [1,1,1], [1,1,1], [2]]
+# ret
+# 下位
+#   3bit  0: 刻子の数(0～4)
+#   3bit  3: 順子の数(0～4)
+#   4bit  6: 頭の位置(1～13)
+#   4bit 10: 面子の位置１(0～13)
+#   4bit 14: 面子の位置２(0～13)
+#   4bit 18: 面子の位置３(0～13)
+#   4bit 22: 面子の位置４(0～13)
+#   1bit 26: 七対子フラグ
+#   1bit 27: 九蓮宝燈フラグ
+#   1bit 28: 一気通貫フラグ
+#   1bit 29: 二盃口フラグ
+#   1bit 30: 一盃口フラグ
+def find_hai_pos(a)
+  ret_array = Array.new
+  p_atama = 0
+  for i in 0..a.size-1
+    for j in 0..a[i].size-1
+      # 頭を探す
+      if a[i][j] &gt;= 2 then
+        # 刻子、順子の優先順位入れ替え
+        for kotsu_shuntus in 0..1
+          t = Marshal.load(Marshal.dump(a))
+          t[i][j] -= 2
+
+          p = 0
+          p_kotsu = Array.new
+          p_shuntsu = Array.new
+          for k in 0..t.size-1
+            for m in 0..t[k].size-1
+              if kotsu_shuntus == 0 then
+                # 刻子を先に取り出す
+                # 刻子
+                if t[k][m] &gt;= 3 then
+                  t[k][m] -= 3
+                  p_kotsu.push(p)
+                end
+                # 順子
+                while t[k].size - m &gt;= 3 &amp;&amp;
+                  t[k][m] &gt;= 1 &amp;&amp;
+                  t[k][m+1] &gt;= 1 &amp;&amp;
+                  t[k][m+2] &gt;= 1 do
+                    t[k][m] -= 1
+                    t[k][m+1] -= 1
+                    t[k][m+2] -= 1
+                    p_shuntsu.push(p)
+                end
+              else
+                # 順子を先に取り出す
+                # 順子
+                while t[k].size - m &gt;= 3 &amp;&amp;
+                  t[k][m] &gt;= 1 &amp;&amp;
+                  t[k][m+1] &gt;= 1 &amp;&amp;
+                  t[k][m+2] &gt;= 1 do
+                    t[k][m] -= 1
+                    t[k][m+1] -= 1
+                    t[k][m+2] -= 1
+                    p_shuntsu.push(p)
+                end
+                # 刻子
+                if t[k][m] &gt;= 3 then
+                  t[k][m] -= 3
+                  p_kotsu.push(p)
+                end
+              end
+              p += 1
+            end
+          end
+          
+          # 上がりの形か？
+          if t.flatten.all? {|x| x==0 } then
+            # 値を求める
+            ret = p_kotsu.size + (p_shuntsu.size &lt;&lt; 3) + (p_atama &lt;&lt; 6)
+            len = 10
+            for x in p_kotsu
+              ret |= x &lt;&lt; len
+              len += 4
+            end
+            for x in p_shuntsu
+              ret |= x &lt;&lt; len
+              len += 4
+            end
+            if a.size == 1 then
+              # 九蓮宝燈フラグ
+              if a == [[4,1,1,1,1,1,1,1,3]] ||
+                a == [[3,2,1,1,1,1,1,1,3]] ||
+                a == [[3,1,2,1,1,1,1,1,3]] ||
+                a == [[3,1,1,2,1,1,1,1,3]] ||
+                a == [[3,1,1,1,2,1,1,1,3]] ||
+                a == [[3,1,1,1,1,2,1,1,3]] ||
+                a == [[3,1,1,1,1,1,2,1,3]] ||
+                a == [[3,1,1,1,1,1,1,2,3]] ||
+                a == [[3,1,1,1,1,1,1,1,4]] then
+                ret |= 1 &lt;&lt; 27
+              end
+            end
+            # 一気通貫
+            if a.size &lt;= 3 &amp;&amp; p_shuntsu.size &gt;= 3 then
+              p_ikki = 0
+              for b in a
+                if b.size == 9 then
+                  b_ikki1 = false
+                  b_ikki2 = false
+                  b_ikki3 = false
+                  for x_ikki in p_shuntsu
+                    b_ikki1 |= (x_ikki == p_ikki)
+                    b_ikki2 |= (x_ikki == p_ikki+3)
+                    b_ikki3 |= (x_ikki == p_ikki+6)
+                  end
+                  if b_ikki1 &amp;&amp; b_ikki2 &amp;&amp; b_ikki3 then
+                    ret |= 1 &lt;&lt; 28
+                  end
+                end
+                p_ikki += b.size
+              end
+            end
+            # 二盃口
+            if p_shuntsu.size == 4 &amp;&amp;
+              p_shuntsu[0] == p_shuntsu[1] &amp;&amp;
+              p_shuntsu[2] == p_shuntsu[3] then
+              ret |= 1 &lt;&lt; 29
+            elsif p_shuntsu.size &gt;= 2 &amp;&amp;  p_kotsu.size + p_shuntsu.size == 4 then
+              # 一盃口
+              if p_shuntsu.size - p_shuntsu.uniq.size &gt;= 1 then
+                ret |= 1 &lt;&lt; 30
+              end
+            end
+            ret_array.push(ret)
+          end
+        end
+      end
+      p_atama += 1
+    end
+  end
+  if ret_array.size &gt; 0 then
+    ret_array.uniq!
+    return ret_array.inject(&quot;0x&quot;+ret_array.shift.to_s(16)){|t,a| t += &quot;,&quot;+&quot;0x&quot;+a.to_s(16)}
+  end
+  t = a.flatten
+  # 七対子判定
+  if t.total == 14 &amp;&amp; t.all? {|x| x==2} then
+    return &quot;0x&quot;+(1 &lt;&lt; 26).to_s(16)
+  end
+end
+
+chitoi = ptn([[2],[2],[2],[2],[2],[2],[2]])
+chitoi.delete_if{|x|
+  t = x.flatten
+  t.any?{|y| y != 2}
+}
+
+(ptn([[1,1,1],[1,1,1],[1,1,1],[1,1,1],[2]]) +
+ ptn([[1,1,1],[1,1,1],[1,1,1],[3],[2]]) +
+ ptn([[1,1,1],[1,1,1],[3],[3],[2]]) +
+ ptn([[1,1,1],[3],[3],[3],[2]]) +
+ ptn([[3],[3],[3],[3],[2]]) +
+ chitoi).uniq.each do |x|
+  printf(&quot;tbl.put(0x%X, new int[] {%s});\n&quot;, calc_key(x), find_hai_pos(x))
+end
+
+(ptn([[1,1,1],[1,1,1],[1,1,1],[2]]) +
+ ptn([[1,1,1],[1,1,1],[3],[2]]) +
+ ptn([[1,1,1],[3],[3],[2]]) +
+ ptn([[3],[3],[3],[2]])).uniq.each do |x|
+  printf(&quot;tbl.put(0x%X, new int[] {%s});\n&quot;, calc_key(x), find_hai_pos(x))
+end
+
+(ptn([[1,1,1],[1,1,1],[2]]) +
+ ptn([[1,1,1],[3],[2]]) +
+ ptn([[3],[3],[2]])).uniq.each do |x|
+  printf(&quot;tbl.put(0x%X, new int[] {%s});\n&quot;, calc_key(x), find_hai_pos(x))
+end
+
+(ptn([[1,1,1],[2]]) +
+ ptn([[3],[2]])).uniq.each do |x|
+  printf(&quot;tbl.put(0x%X, new int[] {%s});\n&quot;, calc_key(x), find_hai_pos(x))
+end
+
+(ptn([[2]])).uniq.each do |x|
+  printf(&quot;tbl.put(0x%X, new int[] {%s});\n&quot;, calc_key(x), find_hai_pos(x))
+end
+</code></pre>
+
+<h2 id="对牌型计算生成key-在从表中查询">对牌型计算生成key， 在从表中查询</h2>
+
+<p>把排列完的牌型做特定的二进制转换， 从低位开始算（即从右到左）， 高位补1。</p>
+
+<p>如：</p>
+
+<pre><code>牌型： [3, 0, 1, 1, 1, 0, 2]
+转换后： 0b1110100011111 --&gt; 7455 --&gt; 0x1D1F
+</code></pre>
+
+<h2 id="java实现-原作者的代码">java实现（原作者的代码）</h2>
+
+<pre><code class="language-java">static int calc_key(int[] n, int[] pos) {
+        int p = -1;
+        int x = 0;
+        int pos_p = 0; // posの配列インデックス
+        boolean b = false; // ひとつ前が0以外
+        // 数牌
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 9; j++) {
+                if (n[i * 9 + j] == 0) {
+                    if (b) {
+                        b = false;
+                        x |= 0x1 &lt;&lt; p;
+                        p++;
+                    }
+                } else {
+                    p++;
+                    b = true;
+                    pos[pos_p++] = i * 9 + j;
+                    switch (n[i * 9 + j]) {
+                    case 2:
+                        x |= 0x3 &lt;&lt; p;
+                        p += 2;
+                        break;
+                    case 3:
+                        x |= 0xF &lt;&lt; p;
+                        p += 4;
+                        break;
+                    case 4:
+                        x |= 0x3F &lt;&lt; p;
+                        p += 6;
+                        break;
+                    }
+                }
+            }
+            if (b) {
+                b = false;
+                x |= 0x1 &lt;&lt; p;
+                p++;
+            }
+        }
+        // 字牌
+        for (int i = TON; i &lt;= CHU; i++) {
+            if (n[i] &gt; 0) {
+                p++;
+                pos[pos_p++] = i;
+                switch (n[i]) {
+                case 2:
+                    x |= 0x3 &lt;&lt; p;
+                    p += 2;
+                    break;
+                case 3:
+                    x |= 0xF &lt;&lt; p;
+                    p += 4;
+                    break;
+                case 4:
+                    x |= 0x3F &lt;&lt; p;
+                    p += 6;
+                    break;
+                }
+                x |= 0x1 &lt;&lt; p;
+                p++;
+            }
+        }
+        return x;
+    }
+</code></pre>
+
+<h2 id="node-js实现">node.js实现</h2>
+
+<pre><code class="language-javascript">/**
+ * 整理排序麻将, 按如下规则
+ * http://hp.vector.co.jp/authors/VA046927/mjscore/mjalgorism.html
+ * @param arr
+ * @returns {Array.&lt;*&gt;}
+ */
+let analyse = function (arr) {
+    let n = n_zero.slice(0);
+    for (let v of arr) {
+        n[v]++;
+    }
+    return n;
+};
+
+let calculateKey = function (mahjongs) {
+    let tempArray = analyse(mahjongs);
+    let p = -1;
+    let x = 0;
+    // let pos = 0; // 麻将位置
+    let b = false; // 前一个0， 0作为分隔使用
+
+    //筒万条
+    for (let i = 0; i &lt; 3; i++) {
+        for (let j = 0; j &lt; 9; j++) {
+            if (tempArray[i * 9 + j] === 0) {
+                if (b) {
+                    b = false;
+                    x |= 0x1 &lt;&lt; p;
+                    p++;
+                }
+            } else {
+                p++;
+                b = true;
+                // positions[pos++] = i * 9 + j;
+                switch (tempArray[i * 9 + j]) {
+                    case 2:
+                        x |= 0x3 &lt;&lt; p;
+                        p += 2;
+                        break;
+                    case 3:
+                        x |= 0xF &lt;&lt; p;
+                        p += 4;
+                        break;
+                    case 4:
+                        x |= 0x3F &lt;&lt; p;
+                        p += 6;
+                        break;
+                }
+            }
+        }
+        if (b) {
+            b = false;
+            x |= 0x1 &lt;&lt; p;
+            p++;
+        }
+    }
+
+    //字牌： 中东南西北发白
+    for (let i = 27; i &lt; 34; i++) {
+        if (tempArray[i] &gt; 0) {
+            p++;
+            // postions[pos++] = i;
+            switch (tempArray[i]) {
+                case 2:
+                    x |= 0x3 &lt;&lt; p;
+                    p += 2;
+                    break;
+                case 3:
+                    x |= 0xF &lt;&lt; p;
+                    p += 4;
+                    break;
+                case 4:
+                    x |= 0x3F &lt;&lt; p;
+                    p += 6;
+                    break;
+            }
+            x |= 0x1 &lt;&lt; p;
+            p++;
+        }
+    }
+    return x;
+};
+</code></pre>
+
+<h2 id="压测">压测</h2>
+
+<pre><code class="language-javascript"> /**
+ * 按100万计算： 大概是465ms
+ * 14 tiles 1000000 times lookup: 465.703ms
+ */
+test('14 tiles pressure load', () =&gt; {
+    let mahjongs = [0, 0, 0, 1, 2, 3, 5, 6, 7, 27, 27, 27, 29, 29];
+    console.time('14 tiles 1000000 times lookup');
+    for (let i = 0; i &lt; 1000000; i++) {
+        util.lookup(mahjongs);
+    }
+    console.timeEnd('14 tiles 1000000 times lookup');
+});
+
+/**
+ * 按100万计算： 大概是464ms
+ * 11 tiles 1000000 times lookup: 464.043ms
+ */
+test('11 tiles pressure load', () =&gt; {
+    let mahjongs = [0, 0, 0, 1, 2, 3, 5, 6, 7, 29, 29];
+    console.time('11 tiles 1000000 times lookup');
+    for (let i = 0; i &lt; 1000000; i++) {
+        util.lookup(mahjongs);
+    }
+    console.timeEnd('11 tiles 1000000 times lookup');
+});
+
+/**
+ * 按100万计算： 大概是402ms
+ * 8 tiles 1000000 times lookup: 402.046ms
+ */
+test('8 tiles pressure load', () =&gt; {
+    let mahjongs = [0, 0, 0, 5, 6, 7, 29, 29];
+    console.time('8 tiles 1000000 times lookup');
+    for (let i = 0; i &lt; 1000000; i++) {
+        util.lookup(mahjongs);
+    }
+    console.timeEnd('8 tiles 1000000 times lookup');
+});
+
+/**
+ * 按100万计算： 大概是390ms
+ * 5 tiles 1000000 times lookup: 390.952ms
+ */
+test('5 tiles pressure load', () =&gt; {
+    let mahjongs = [5, 5, 5, 29, 29];
+    console.time('5 tiles 1000000 times lookup');
+    for (let i = 0; i &lt; 1000000; i++) {
+        util.lookup(mahjongs);
+    }
+    console.timeEnd('5 tiles 1000000 times lookup');
+});
+</code></pre>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+          <li class="previous">
+            <a href="http://sufuq.com/post/javascript-%E4%BD%BF%E7%94%A8jest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-toggle="tooltip" data-placement="top" title="Javascript 使用jest单元测试">&larr; 前一篇</a>
+          </li>
+        
+        
+      </ul>
+
+      
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:fortunesusw@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/fortunesusw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="http://sufuq.com/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          苏示水
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="http://sufuq.com">示水的程序客栈</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          由 <a href="http://gohugo.io">Hugo v0.26</a> 强力驱动 &nbsp;&bull;&nbsp; 主题 <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> 移植自 <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://sufuq.com/js/main.js"></script>
+<script src="http://sufuq.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+
+
+  </body>
+</html>
+
